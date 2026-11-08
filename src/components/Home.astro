@@ -1,0 +1,515 @@
+---
+import { ArrowLeft, ArrowRight, Check, CircleCheck } from '@lucide/astro'
+import Layout from '@/layouts/Layout.astro'
+import BlogCard from '@/components/BlogCard.astro'
+import ProjectForm from '@/components/ProjectForm.astro'
+import ServiceCarousel from '@/components/ServiceCarousel.astro'
+import WhyChooseUs from '@/components/WhyChooseUs.astro'
+import { Carousel, CarouselSlide } from '@/ui/carousel'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/ui/accordion'
+import SiteImage from '@/components/SiteImage.astro'
+import { href, localized, phoneHref, settings, siteText, whatsappHref } from '@/lib/i18n'
+
+interface Props {
+  locale: string
+  translated?: string[]
+}
+
+const { locale, translated } = Astro.props
+const t = await siteText(locale)
+const s = await settings()
+const wa = whatsappHref(s.whatsapp, t.whatsapp.message)
+const services = (await localized('services', locale)).sort((a, b) => a.data.order - b.data.order)
+const posts = (await localized('posts', locale)).sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+const siteUrl = (Astro.site?.toString() ?? Astro.url.origin).replace(/\/$/, '')
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebSite', '@id': `${siteUrl}/#website`, url: siteUrl, name: s.brand, description: t.hero.text, inLanguage: locale },
+    {
+      '@type': 'LocalBusiness',
+      '@id': `${siteUrl}/#organization`,
+      name: s.brand,
+      url: siteUrl,
+      telephone: s.phone,
+      email: s.email,
+      address: { '@type': 'PostalAddress', streetAddress: s.address },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: t.faq.items.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+    },
+  ],
+}
+
+// Two "pillar" panels: the services and the latest articles of this language.
+const pillars = [
+  { ...t.pillars.items[0], color: 'primary', links: services.map((e) => [e.data.title, href(locale, `/services/${e.slug}/`)]), more: href(locale, '/services/') },
+  { ...t.pillars.items[1], color: 'emerald', links: posts.map((e) => [e.data.title, href(locale, `/blog/${e.slug}/`)]), more: href(locale, '/blog/') },
+]
+const initials = (name: string) => name.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase()
+---
+
+<Layout locale={locale} description={t.hero.text} translated={translated}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <main class="home">
+    <!-- Hero -->
+    <section class="py-4 sm:py-6 lg:py-8 mb-8 sm:mb-12 lg:mb-16">
+      <div class="mx-auto w-[95vw]">
+        <div class="relative isolate flex min-h-[580px] sm:min-h-[640px] lg:min-h-[700px] items-center overflow-hidden rounded-none bg-white text-black shadow-[0_20px_50px_-20px_rgba(0,0,0,0.08)] border border-neutral-300 px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20">
+          <div class="absolute inset-0 -z-10 bg-[radial-gradient(#e5e5e5_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-70" aria-hidden="true"></div>
+          <div class="absolute -right-20 -top-20 -z-10 size-96 rounded-full bg-primary/5 blur-3xl" aria-hidden="true"></div>
+          <div class="absolute -left-20 -bottom-20 -z-10 size-96 rounded-full bg-neutral-900/5 blur-3xl" aria-hidden="true"></div>
+
+          <div class="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-14 xl:gap-16">
+            <div class="w-full">
+              <div class="inline-flex items-center gap-2.5 border border-neutral-300 bg-neutral-100 px-3.5 py-1.5 text-[11px] sm:text-xs font-black uppercase tracking-[0.14em] text-black shadow-2xs">
+                <span class="size-2 rounded-full bg-primary animate-pulse"></span>
+                <span>{t.hero.eyebrow}</span>
+              </div>
+
+              <h1 class="mt-5 text-2xl sm:text-3xl md:text-4xl lg:text-[38px] font-black uppercase text-black tracking-[-0.03em] leading-[1.1]">
+                {t.hero.title} <span class="text-primary">{t.hero.accent}</span>
+              </h1>
+
+              <p class="mt-4 max-w-2xl lg:max-w-3xl text-base sm:text-lg text-neutral-800 leading-relaxed font-medium">
+                {t.hero.text}
+              </p>
+
+              <div class="mt-5 flex flex-wrap items-center gap-2.5 text-xs font-bold text-black">
+                {t.highlights.map((item) => (
+                  <span class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-neutral-50 border border-neutral-300 shadow-2xs">
+                    <CircleCheck size={14} class="text-primary" /> {item}
+                  </span>
+                ))}
+              </div>
+
+              <div class="mt-7 grid grid-cols-3 gap-6 border-y border-neutral-200 py-5 max-w-xl">
+                {t.metrics.map((m, i) => (
+                  <div class:list={[i > 0 && 'border-s border-neutral-200 ps-6']}>
+                    <strong class:list={['block text-2xl sm:text-3xl font-black tracking-tight', i === t.metrics.length - 1 ? 'text-primary' : 'text-black']}>{m.value}</strong>
+                    <span class="text-[11px] sm:text-xs font-bold text-neutral-600 uppercase tracking-wider">{m.label}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div class="mt-7 flex flex-wrap items-center gap-4">
+                <a
+                  href={href(locale, '/contact/#form')}
+                  class="group inline-flex items-center justify-center gap-3 bg-primary hover:bg-[#b84d12] text-white font-black uppercase text-xs sm:text-[13px] tracking-wider px-8 py-4.5 transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/25"
+                >
+                  <span>{t.hero.primary}</span>
+                  <ArrowRight size={16} class="group-hover:translate-x-1 transition-transform rtl:rotate-180" />
+                </a>
+                <a
+                  href={wa}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="group inline-flex items-center justify-center gap-3 bg-white hover:bg-black border-2 border-black text-black hover:text-white font-black uppercase text-xs sm:text-[13px] tracking-wider px-8 py-4.5 transition-all duration-300 hover:scale-[1.02] shadow-sm hover:shadow-md"
+                >
+                  <span>{t.whatsapp.ask}</span>
+                  <ArrowRight size={16} class="group-hover:translate-x-1 transition-transform rtl:rotate-180" />
+                </a>
+              </div>
+
+              <a
+                href={s.googleReviewsUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={t.testimonials.see}
+                class="mt-7 inline-flex items-center gap-3.5 border border-neutral-300 bg-white p-3 text-black shadow-2xs transition hover:border-primary/60 hover:shadow-md"
+              >
+                <span class="grid size-10 place-items-center bg-neutral-100 border border-neutral-300">
+                  <img src="/google-icon.svg" alt="" class="size-6" width="24" height="24" />
+                </span>
+                <div class="leading-tight text-start">
+                  <div class="flex items-center gap-2 text-sm font-black text-black">
+                    <span>{s.googleRating ?? '5.0'}/5</span>
+                    <span class="tracking-widest text-[#f59e0b]">★★★★★</span>
+                  </div>
+                  <p class="mt-0.5 text-xs text-neutral-600 font-medium">{t.hero.rating}</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- Right column: team photo with the process steps -->
+            <div class="relative hidden w-full max-w-[620px] lg:max-w-none mx-auto lg:block">
+              <div class="border border-neutral-300 bg-white p-4 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.18)]">
+                <div class="flex items-center justify-between border-b border-neutral-200 pb-3 text-[11px] font-black uppercase tracking-[0.14em]">
+                  <span class="flex items-center gap-2"><span class="size-2 bg-primary"></span>{t.hero.panel}</span>
+                  <span class="border border-primary/30 bg-primary/10 px-2 py-0.5 font-mono text-primary">{t.hero.status}</span>
+                </div>
+                <div class="relative mt-4 aspect-[4/3] overflow-hidden bg-neutral-900">
+                  <SiteImage src="/images/hero.webp" alt="" class="size-full object-cover" widths={[480, 640, 800]} sizes="(min-width: 1024px) 40vw, 1px" loading="eager" fetchpriority="high" width="800" height="600" />
+                </div>
+                <ol class="mt-4 grid grid-cols-4 gap-2">
+                  {t.process.steps.map((step, i) => (
+                    <li class:list={['border p-2 text-[11px] font-bold', i === 0 ? 'border-primary bg-primary/5 text-black' : 'border-neutral-200 text-neutral-600']}>
+                      <span class="block font-mono text-primary">0{i + 1}</span>
+                      <span class="line-clamp-1">{step.title}</span>
+                    </li>
+                  ))}
+                </ol>
+                <p class="mt-3 flex items-center gap-2 border border-neutral-200 bg-neutral-50 px-3 py-2 text-xs text-neutral-700">
+                  <CircleCheck size={14} class="shrink-0 text-primary" />
+                  <span class="line-clamp-1"><strong class="text-black">01. {t.process.steps[0].title}:</strong> {t.process.steps[0].text}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services carousel -->
+    <ServiceCarousel locale={locale} />
+
+    <!-- Two pillars -->
+    <section class="border-y border-neutral-200 bg-white py-20 lg:py-28 [content-visibility:auto] [contain-intrinsic-size:auto_1100px]" id="pillars">
+      <div class="shell">
+        <div class="text-center max-w-4xl mx-auto mb-16" data-reveal>
+          <div class="inline-block">
+            <span class="inline-block -skew-x-12 bg-neutral-950 px-5 py-1.5 text-xs font-black uppercase tracking-[0.2em] text-white">
+              <span class="inline-block skew-x-12">{t.pillars.badge}</span>
+            </span>
+          </div>
+          <h2 class="mt-5 text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-neutral-950 leading-tight">
+            {t.pillars.title} <span class="text-primary">{t.pillars.accent}</span>
+          </h2>
+          <p class="mt-4 text-sm sm:text-base text-neutral-600 max-w-2xl mx-auto leading-relaxed">{t.pillars.text}</p>
+        </div>
+
+        <div class="grid gap-10 lg:grid-cols-2 lg:gap-12" data-reveal>
+          {pillars.map((p, i) => {
+            const green = p.color === 'emerald'
+            return (
+              <div class:list={['flex flex-col justify-between border border-neutral-200 bg-neutral-50/50 p-8 sm:p-10 border-t-4 shadow-xs transition-colors hover:border-neutral-300', green ? 'border-t-emerald-600' : 'border-t-primary']}>
+                <div>
+                  <div class="flex items-center justify-between border-b border-neutral-200 pb-4">
+                    <div class="flex items-center gap-2.5">
+                      <span class:list={['grid size-8 place-items-center text-white text-xs font-black', green ? 'bg-emerald-600' : 'bg-primary']}>0{i + 1}</span>
+                      <div>
+                        <h3 class="text-lg sm:text-xl font-black uppercase tracking-tight text-neutral-950">{p.title}</h3>
+                        <p class:list={['text-[11px] font-bold uppercase tracking-wider', green ? 'text-emerald-700' : 'text-primary']}>{p.subtitle}</p>
+                      </div>
+                    </div>
+                    <span class="hidden sm:inline-block text-[11px] font-black uppercase tracking-wider text-neutral-400 bg-white border border-neutral-200 px-2.5 py-1">{p.tag}</span>
+                  </div>
+
+                  <p class="mt-5 text-sm text-neutral-600 leading-relaxed">{p.text}</p>
+
+                  <div class="mt-6">
+                    <div class="flex items-center justify-between border-b border-neutral-200 pb-2 mb-1">
+                      <span class="text-[11px] font-black uppercase tracking-wider text-neutral-500">{p.list}</span>
+                      <a href={p.more} class:list={['text-[11px] font-black uppercase tracking-wider hover:text-neutral-950 transition-colors', green ? 'text-emerald-700' : 'text-primary']}>{p.action} →</a>
+                    </div>
+                    <div class="divide-y divide-neutral-200 border-b border-neutral-200">
+                      {p.links.map(([label, url], n) => (
+                        <a href={url} class="group flex items-center justify-between py-3 px-1 transition-colors hover:bg-white hover:ps-2.5">
+                          <div class="flex items-center gap-3">
+                            <span class:list={['font-mono text-xs font-bold text-neutral-400', green ? 'group-hover:text-emerald-600' : 'group-hover:text-primary']}>0{n + 1}.</span>
+                            <span class:list={['text-xs sm:text-sm font-bold text-neutral-900 transition-colors', green ? 'group-hover:text-emerald-700' : 'group-hover:text-primary']}>{label}</span>
+                          </div>
+                          <span class:list={['text-xs font-bold text-neutral-400 transition-transform group-hover:translate-x-0.5', green ? 'group-hover:text-emerald-700' : 'group-hover:text-primary']}>{t.pillars.view} →</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 border border-neutral-200 bg-white p-4 text-xs font-bold text-neutral-800">
+                    {p.bullets.map((b) => (
+                      <div class="flex items-center gap-2">
+                        <span class:list={['size-1.5', green ? 'bg-emerald-600' : 'bg-primary']}></span>
+                        <span>{b}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-neutral-200 flex flex-wrap items-center gap-3">
+                  <a href={p.more} class:list={['inline-flex min-h-12 items-center justify-center gap-2 text-white px-7 text-xs font-black uppercase tracking-wider transition-all duration-200 hover:scale-[1.01]', green ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-primary hover:bg-[#b84d12]']}>
+                    <span>{p.action}</span>
+                    <ArrowRight class="size-4 rtl:rotate-180" />
+                  </a>
+                  <a href={wa} target="_blank" rel="noreferrer" class="inline-flex min-h-12 items-center justify-center gap-2 border-2 border-neutral-950 bg-white hover:bg-neutral-950 hover:text-white text-neutral-950 px-6 text-xs font-black uppercase tracking-wider transition-all duration-200">
+                    <span>{t.whatsapp.ask}</span>
+                  </a>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- Why choose us -->
+    <WhyChooseUs locale={locale} />
+
+    <!-- Process -->
+    <section class="relative isolate overflow-hidden bg-[#0d0f10] py-20 text-white md:py-24 lg:min-h-[54rem] [content-visibility:auto] [contain-intrinsic-size:auto_900px]" id="process" aria-labelledby="process-title">
+      <SiteImage class="absolute inset-0 -z-30 size-full object-cover object-[54%_center] opacity-40 grayscale" src="/images/process.webp" alt="" aria-hidden="true" loading="lazy" />
+      <div class="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(8,10,11,.72)_0%,rgba(8,10,11,.78)_38%,rgba(8,10,11,.97)_80%,#0d0f10_100%)]" aria-hidden="true"></div>
+      <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,.2)_48%,rgba(0,0,0,.75)_100%)]" aria-hidden="true"></div>
+      <div class="shell relative">
+        <div class="mx-auto max-w-5xl text-center" data-reveal>
+          <p class="mx-auto w-fit -skew-x-12 bg-primary px-7 py-3 text-[13px] font-black uppercase tracking-[.08em] text-white"><span class="block skew-x-12">{t.process.badge}</span></p>
+          <h2 class="mt-6 text-balance text-[clamp(2.35rem,4.8vw,4.75rem)] font-black uppercase leading-[.98] tracking-[-.055em] text-white" id="process-title">{t.process.title}</h2>
+          <p class="mx-auto mt-6 max-w-3xl text-base leading-7 text-white/72">{t.process.text}</p>
+        </div>
+        <div class="relative mx-auto mt-14 max-w-7xl lg:min-h-[27rem]">
+          <div class="relative z-10 mx-auto mt-10 grid size-[17rem] place-items-center rounded-full bg-[linear-gradient(145deg,#f1f1f1_0%,#777_28%,#d8d8d8_51%,#575757_76%,#e2e2e2_100%)] p-[13px] shadow-[0_24px_65px_rgba(0,0,0,.6)] md:size-[19rem] lg:mt-0 lg:size-[21rem]" data-process-core>
+            <div class="grid size-full place-items-center rounded-full bg-[#202224] p-3 shadow-[inset_0_0_0_3px_rgba(255,255,255,.22),inset_0_12px_25px_rgba(255,255,255,.1)]">
+              <a
+                class="group grid size-full place-items-center rounded-full bg-[radial-gradient(circle_at_50%_30%,#36393b_0%,#181a1b_50%,#090a0a_100%)] text-center shadow-[inset_0_8px_24px_rgba(255,255,255,.12),0_0_28px_rgba(239,68,68,.65)] focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-white"
+                href={wa}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span class="flex flex-col items-center px-4">
+                  <span class="mb-5 block h-4 w-14 rounded-full bg-gradient-to-r from-orange-400 to-red-600 shadow-[0_0_18px_rgba(239,68,68,.9)]" data-process-indicator aria-hidden="true"></span>
+                  <span class="text-xs font-bold italic uppercase tracking-wider text-white/75">{t.process.kicker}</span>
+                  <strong class="mt-1.5 text-[1.45rem] font-black uppercase leading-tight tracking-[-.04em] text-white md:text-[1.75rem]">{t.process.center}</strong>
+                  <span class="mt-3 inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-primary group-hover:text-white transition-colors">
+                    <span>{t.process.action}</span>
+                    <ArrowRight class="size-3.5 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180" stroke-width={3} aria-hidden="true" />
+                  </span>
+                </span>
+              </a>
+            </div>
+          </div>
+          <ol class="mt-10 grid gap-px bg-white/16 md:grid-cols-2 lg:absolute lg:inset-0 lg:mt-0 lg:grid-cols-[1fr_22rem_1fr] lg:grid-rows-2 lg:gap-0 lg:bg-transparent" aria-labelledby="process-title">
+            {t.process.steps.slice(0, 4).map((step, index) => {
+              const positions = ['lg:col-start-1 lg:row-start-1 lg:self-start lg:pe-16', 'lg:col-start-3 lg:row-start-1 lg:self-start lg:ps-16 lg:text-end', 'lg:col-start-1 lg:row-start-2 lg:self-end lg:pe-16', 'lg:col-start-3 lg:row-start-2 lg:self-end lg:ps-16 lg:text-end']
+              return <li class:list={[`bg-[#111415]/95 p-6 md:p-7 lg:bg-transparent lg:p-0 ${positions[index] ?? ''}`, 'text-white']} data-reveal><h3 class="text-[clamp(1.25rem,1.8vw,1.65rem)] font-black uppercase leading-tight tracking-[-.035em] text-white"><span class="me-2 text-primary">0{index + 1} ·</span>{step.title}</h3><p class="mt-4 text-base leading-7 text-white/68">{step.text}</p><span class="mt-7 block h-px bg-white/18 lg:mt-8" aria-hidden="true"></span></li>
+            })}
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials (none: a site without Google reviews yet) -->
+    {t.testimonials.items.length > 0 && (
+    <section class="border-b border-neutral-200 bg-white py-20 md:py-28 [content-visibility:auto] [contain-intrinsic-size:auto_1000px]">
+      <div class="shell">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8" data-reveal>
+          <div>
+            <div class="inline-flex items-center gap-2 border border-neutral-300 bg-neutral-100 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-neutral-900 shadow-2xs">
+              <span class="size-2 rounded-full bg-primary animate-pulse"></span>
+              <span>{t.testimonials.badge}</span>
+            </div>
+            <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl font-black uppercase text-neutral-950 tracking-tight leading-tight">
+              {t.testimonials.title} <span class="text-primary">{t.testimonials.accent}</span>
+            </h2>
+            <p class="mt-3 text-sm sm:text-base text-neutral-600 max-w-xl">{t.testimonials.text}</p>
+          </div>
+
+          <a
+            href={s.googleReviewsUrl}
+            target="_blank"
+            rel="noreferrer"
+            class="group flex items-center gap-4 border border-neutral-200 bg-[#fafafa] p-4 sm:p-5 shadow-xs shrink-0 hover:border-primary/50 hover:bg-white hover:shadow-md transition-all duration-300"
+          >
+            <div class="grid size-12 place-items-center bg-white border border-neutral-200 p-2 shadow-2xs group-hover:scale-105 transition-transform">
+              <img src="/google-icon.svg" alt="Google" class="size-full object-contain" width="24" height="24" />
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-base font-black text-neutral-950">{s.googleRating ?? '5.0'}</span>
+                <div class="flex text-amber-400 text-sm">★★★★★</div>
+              </div>
+              <p class="text-xs font-semibold text-neutral-500 mt-0.5 group-hover:text-primary transition-colors flex items-center gap-1">
+                <span>{t.testimonials.see}</span>
+                <ArrowRight class="size-3 transition-transform group-hover:translate-x-0.5 rtl:rotate-180" />
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <div class="relative mt-12 md:mt-16 px-0 sm:px-14">
+          <button
+            class="hidden sm:grid absolute -start-2 top-1/2 z-10 size-12 -translate-y-1/2 place-items-center border border-neutral-300 bg-white text-neutral-900 shadow-sm transition-all duration-200 hover:bg-primary hover:border-primary hover:text-white hover:scale-105 active:scale-95"
+            type="button"
+            data-testimonial-prev
+            aria-label={t.testimonials.prev}
+          >
+            <ArrowLeft class="size-5 rtl:rotate-180" />
+          </button>
+
+          <Carousel class="gap-6 pb-4" align="start" snapType="proximity" data-testimonial-carousel>
+            {t.testimonials.items.map((item) => (
+              <CarouselSlide class="w-full md:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
+                <article class="flex h-full min-h-[22rem] flex-col justify-between border border-neutral-200 bg-white p-7 shadow-xs transition-all duration-300 hover:border-neutral-300 hover:shadow-md" data-reveal>
+                  <div>
+                    <div class="flex items-center justify-between gap-3 border-b border-neutral-100 pb-4">
+                      <div class="flex items-center gap-1.5">
+                        <div class="flex text-amber-400 text-xs" aria-hidden="true">{'★'.repeat(item.rating ?? 5)}</div>
+                        <span class="text-[11px] font-black text-neutral-800">{(item.rating ?? 5).toFixed(1)}</span>
+                      </div>
+                      <a href={s.googleReviewsUrl} target="_blank" rel="noreferrer" class="flex items-center gap-1.5 bg-neutral-50 hover:bg-neutral-100 border border-neutral-200/80 px-2 py-1 rounded transition-colors">
+                        <img src="/google-icon.svg" alt="Google" class="size-3.5 object-contain" width="14" height="14" />
+                        <span class="text-[10px] font-bold text-neutral-600">{t.testimonials.source}</span>
+                      </a>
+                    </div>
+                    <div class="mt-4">
+                      <span class="inline-block rounded bg-primary/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-primary">{item.project}</span>
+                    </div>
+                    <p class="mt-3 text-sm leading-relaxed text-neutral-700 font-medium">"{item.quote}"</p>
+                  </div>
+                  <div class="mt-6 pt-4 border-t border-neutral-100 flex items-center gap-3">
+                    <div class="grid size-10 shrink-0 place-items-center rounded-full bg-neutral-950 text-white text-xs font-black uppercase tracking-wider">{initials(item.name)}</div>
+                    <div class="min-w-0 flex-1">
+                      <strong class="block truncate text-xs font-black uppercase text-neutral-950 tracking-tight">{item.name}</strong>
+                      <small class="block truncate text-[11px] font-medium text-neutral-500">{item.role}</small>
+                    </div>
+                    <span class="shrink-0 inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                      <Check class="size-3" />
+                      <span class="hidden sm:inline">{t.testimonials.verified}</span>
+                    </span>
+                  </div>
+                </article>
+              </CarouselSlide>
+            ))}
+          </Carousel>
+
+          <button
+            class="hidden sm:grid absolute -end-2 top-1/2 z-10 size-12 -translate-y-1/2 place-items-center border border-neutral-300 bg-white text-neutral-900 shadow-sm transition-all duration-200 hover:bg-primary hover:border-primary hover:text-white hover:scale-105 active:scale-95"
+            type="button"
+            data-testimonial-next
+            aria-label={t.testimonials.next}
+          >
+            <ArrowRight class="size-5 rtl:rotate-180" />
+          </button>
+        </div>
+      </div>
+    </section>
+    )}
+
+    <!-- Quote form -->
+    <section class="border-y border-neutral-200 bg-[#f8f9fa] py-20 lg:py-28 [content-visibility:auto] [contain-intrinsic-size:auto_1100px]" id="quote">
+      <div class="shell grid gap-12 lg:grid-cols-12 lg:gap-16 items-center">
+        <div class="lg:col-span-5 flex flex-col justify-between" data-reveal>
+          <div>
+            <div class="inline-block">
+              <span class="inline-block -skew-x-12 bg-neutral-950 px-4 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-white">
+                <span class="inline-block skew-x-12">{t.quote.badge}</span>
+              </span>
+            </div>
+            <h2 class="mt-5 text-3xl sm:text-4xl lg:text-5xl font-black uppercase leading-[1.06] tracking-tight text-neutral-950">
+              {t.quote.title} <span class="text-primary">{t.quote.accent}</span>
+            </h2>
+            <p class="mt-4 text-sm sm:text-base leading-relaxed text-neutral-600 font-normal">{t.quote.text}</p>
+
+            <div class="mt-8 space-y-3">
+              {t.quote.steps.map((step, i) => (
+                <div class="flex items-start gap-3.5 p-3.5 border border-neutral-200 bg-white">
+                  <div class="grid size-7 shrink-0 place-items-center bg-primary text-white font-mono font-black text-xs">0{i + 1}</div>
+                  <div>
+                    <h3 class="text-xs font-black uppercase tracking-tight text-neutral-950">{step.title}</h3>
+                    <p class="text-xs text-neutral-600 mt-0.5 leading-normal">{step.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-8 border-s-4 border-primary bg-neutral-950 p-6 text-white shadow-md">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-primary">{t.quote.hotline}</span>
+                <span class="inline-flex items-center gap-1.5 text-[10px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 border border-emerald-800/60">
+                  <span class="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  {t.whatsapp.online}
+                </span>
+              </div>
+              <div class="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <a href={phoneHref(s.phone)} dir="ltr" class="text-2xl font-black text-white hover:text-primary transition-colors tracking-tight">{s.phone}</a>
+                <a href={wa} target="_blank" rel="noreferrer" class="inline-flex min-h-11 items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1fb65a] text-white px-5 text-xs font-black uppercase tracking-wider transition-all duration-200 hover:scale-[1.02] shadow-sm">
+                  <span>{t.whatsapp.ask}</span>
+                  <ArrowRight class="size-4 rtl:rotate-180" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7" data-reveal>
+          <ProjectForm locale={locale} hideHeading />
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="bg-white py-20 md:py-24 [content-visibility:auto] [contain-intrinsic-size:auto_1000px]">
+      <div class="shell">
+        <div class="mx-auto max-w-3xl text-center" data-reveal>
+          <p class="mx-auto w-fit -skew-x-12 bg-primary px-7 py-3 text-xs font-black uppercase italic tracking-[.12em] text-white">
+            <span class="block skew-x-12">{t.blog.badge}</span>
+          </p>
+          <h2 class="mt-6 text-4xl font-black uppercase leading-none tracking-[-.055em] text-slate-950 md:text-6xl">{t.blog.title}</h2>
+          <p class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-black/70">{t.blog.intro}</p>
+        </div>
+        <div class="mt-14 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+          {posts.slice(0, 3).map((post, index) => <BlogCard locale={locale} post={post} index={index + 1} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bg-white py-20 md:py-24 [content-visibility:auto] [contain-intrinsic-size:auto_1100px]" id="faq">
+      <div class="shell">
+        <div class="grid items-end gap-5 md:grid-cols-[10rem_1fr]" data-reveal>
+          <p class="w-fit -skew-x-12 bg-primary px-7 py-3 text-xs font-black uppercase italic tracking-[.12em] text-white">
+            <span class="block skew-x-12">{t.faq.badge}</span>
+          </p>
+          <div>
+            <h2 class="text-4xl font-black uppercase leading-none tracking-[-.055em] text-slate-950 md:text-6xl">{t.faq.title}</h2>
+            <p class="mt-4 text-sm leading-7 text-black/70">{t.faq.text}</p>
+          </div>
+        </div>
+        <div class="mt-14 grid gap-10 lg:grid-cols-[.85fr_1.15fr] lg:gap-16">
+          <div class="relative min-h-[22rem] overflow-hidden md:min-h-[31rem]" data-reveal>
+            <SiteImage class="absolute inset-0 size-full object-cover" src="/images/faq.webp" alt="" loading="lazy" />
+          </div>
+          <div data-reveal>
+            <Accordion type="single">
+              {t.faq.items.map((f, index) => (
+                <AccordionItem value={`faq-${index}`} open={index === 0}>
+                  <AccordionTrigger>{f.question}</AccordionTrigger>
+                  <AccordionContent>{f.answer}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+        <div class="relative z-10 mt-10 grid gap-5 sm:gap-6 overflow-visible p-6 sm:p-8 text-white md:-mt-16 md:me-10 md:ms-16 md:grid-cols-[1.2fr_auto_1fr] md:items-center md:px-14 md:py-8">
+          <div class="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950 to-slate-900 border-s-4 border-primary md:border-s-0 md:[clip-path:polygon(5%_0%,100%_0,100%_100%,0%_100%)] shadow-2xl">
+            <span class="hidden md:block absolute -left-5 top-0 h-full w-12 -skew-x-12 bg-primary" aria-hidden="true"></span>
+          </div>
+          <h3 class="relative text-xl sm:text-2xl lg:text-[30px] font-black uppercase italic leading-tight tracking-tight text-white">
+            <span class="block">{t.faq.bannerTitle}</span>
+            <span class="block text-amber-400">{t.faq.bannerAccent}</span>
+          </h3>
+          <span class="hidden h-24 w-px bg-primary md:block" aria-hidden="true"></span>
+          <p class="max-w-md text-sm sm:text-base leading-relaxed text-neutral-200">{t.faq.bannerText}</p>
+          <a
+            class="inline-flex w-full items-center justify-center gap-3 bg-primary hover:bg-white hover:text-slate-950 text-white font-black uppercase text-xs sm:text-sm py-3.5 px-6 transition-all duration-300 shadow-lg md:absolute md:end-[-2.5rem] md:top-1/2 md:-translate-y-1/2 md:size-20 md:shrink-0 md:p-0 md:grid md:place-items-center"
+            href={wa}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={t.whatsapp.ask}
+          >
+            <span class="md:hidden">{t.whatsapp.ask}</span>
+            <ArrowRight size={20} class="md:size-7 rtl:rotate-180" />
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  const testimonialCarousel = document.querySelector('[data-testimonial-carousel]')
+  const step = () => (testimonialCarousel.clientWidth / 3) * (document.dir === 'rtl' ? -1 : 1)
+  document.querySelector('[data-testimonial-prev]')?.addEventListener('click', () => testimonialCarousel?.scrollBy({ left: -step(), behavior: 'smooth' }))
+  document.querySelector('[data-testimonial-next]')?.addEventListener('click', () => testimonialCarousel?.scrollBy({ left: step(), behavior: 'smooth' }))
+</script>

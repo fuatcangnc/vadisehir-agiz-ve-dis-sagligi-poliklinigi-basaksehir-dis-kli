@@ -1,0 +1,42 @@
+---
+import { Icon } from 'astro-icon/components'
+import Brand from './Brand.astro'
+import CtaBanner from './CtaBanner.astro'
+import { href, localized, menu, menuHref, phoneHref, settings, siteText } from '@/lib/i18n'
+
+interface Props {
+  locale: string
+}
+
+const { locale } = Astro.props
+const t = await siteText(locale)
+const s = await settings()
+const services = (await localized('services', locale)).sort((a, b) => a.data.order - b.data.order)
+const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.address)}`
+const quickLinks = (await menu(locale, 'footer')).map((l) => [l.label, menuHref(locale, l.href)])
+---
+
+<!-- CTA Banner -->
+<CtaBanner locale={locale} />
+
+<!-- Footer Main -->
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <section class="footer-brand" aria-labelledby="footer-brand-title">
+      <h2 class="sr-only" id="footer-brand-title">{s.brand}</h2>
+      <Brand locale={locale} inverse />
+      <p>{t.footer.tagline}</p>
+      <ul class="trust-list">{t.footer.trust.map((item) => <li>{item}</li>)}</ul>
+      <ul class="social-list"><li><a aria-label="Facebook" href={s.facebook}><Icon name="simple-icons:facebook" size={16} /></a></li><li><a aria-label="Instagram" href={s.instagram}><Icon name="simple-icons:instagram" size={16} /></a></li><li><a aria-label="YouTube" href={s.youtube}><Icon name="simple-icons:youtube" size={16} /></a></li></ul>
+    </section>
+    <nav class="footer-column" aria-labelledby="footer-services-title">
+      <h3 id="footer-services-title">{t.nav.services}</h3>
+      <ul class="numbered-list">
+        {services.map((service) => <li><a href={href(locale, `/services/${service.slug}/`)}>{service.data.title}</a></li>)}
+      </ul>
+    </nav>
+    <nav class="footer-column" aria-labelledby="footer-corporate-title"><h3 id="footer-corporate-title">{t.nav.company}</h3><ul>{quickLinks.map(([label, url]) => <li><a href={url}>{label}</a></li>)}</ul></nav>
+    <section class="footer-column footer-contact" aria-labelledby="footer-contact-title"><h3 id="footer-contact-title">{t.footer.contact}</h3><address><a href={phoneHref(s.phone)}><Icon name="lucide:phone" size={16} /><span><small>{t.contact.phone}</small><bdi dir="ltr">{s.phone}</bdi></span></a><a href={`mailto:${s.email}`}><Icon name="lucide:mail" size={16} /><span><small>{t.contact.email}</small>{s.email}</span></a><a href={mapHref} target="_blank" rel="noreferrer"><Icon name="lucide:map-pin" size={16} /><span><small>{t.contact.office}</small>{s.address}</span></a><div><Icon name="lucide:clock-3" size={16} /><span><small>{t.contact.hours}</small>{t.contact.hoursValue}<small>{t.contact.closed}</small></span></div></address></section>
+  </div>
+  <div class="shell footer-bottom"><p>© {new Date().getFullYear()} <bdi>{s.brand}</bdi>. {t.footer.rights}</p></div>
+</footer>

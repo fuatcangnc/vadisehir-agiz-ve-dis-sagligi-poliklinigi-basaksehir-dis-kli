@@ -1,0 +1,52 @@
+# WuppyCMS "Publish at": a built (static) site decides at build time whether a page is out yet. When a page's
+# publish time has passed since the last commit and this workflow's last run, it starts a new build once (a commit
+# after that time already did; a run that failed has already reported it):
+# - the WUPPY_DEPLOY_HOOK secret, if set: the host's build hook URL (Netlify, Vercel, Cloudflare Pages …). Needs no
+#   commit, so it also works when the branch is protected.
+# - otherwise this repo's own deploy workflows (on push, with workflow_dispatch) are started, since a push made here
+#   doesn't start them, and an empty commit is pushed for hosts that build on push.
+name: Publish scheduled pages
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild when a scheduled page is due
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPLOY_HOOK: ${{ secrets.WUPPY_DEPLOY_HOOK }}
+        run: |
+          due=$(node -e '
+            const fs = require("fs");
+            const file = "src/content/page-settings.json";
+            const since = Math.max(...process.argv.slice(1).map((d) => Date.parse(d) || 0));
+            const now = Date.now();
+            const all = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : {};
+            const due = Object.values(all).some((p) => { const t = Date.parse(p?.publishAt ?? ""); return t > since && t <= now; });
+            console.log(due ? "yes" : "");
+          ' "$(git log -1 --format=%cI)" "$(gh run list --workflow wuppy-publish.yml --status completed --limit 1 --json createdAt --jq '.[0].createdAt // ""')")
+          if [ -z "$due" ]; then exit 0; fi
+          if [ -n "$DEPLOY_HOOK" ]; then
+            curl -fsS -X POST "$DEPLOY_HOOK"
+            exit 0
+          fi
+          started=""
+          for f in .github/workflows/*.yml .github/workflows/*.yaml; do
+            [ -f "$f" ] && [ "$(basename "$f")" != "wuppy-publish.yml" ] || continue
+            grep -q "workflow_dispatch" "$f" && grep -Eq '^\s*push:|^on:.*push' "$f" || continue
+            gh workflow run "$(basename "$f")" --ref "$GITHUB_REF_NAME" && started="yes"
+          done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty -m "Publish scheduled pages (via WuppyCMS)"
+          if ! git push origin "HEAD:$GITHUB_REF_NAME" && [ -z "$started" ]; then
+            echo "::error::Could not push to $GITHUB_REF_NAME (protected branch?). Add your host's build hook URL as the WUPPY_DEPLOY_HOOK repository secret so scheduled pages go live."
+            exit 1
+          fi

@@ -1,0 +1,13 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ServiceDetail from '@/components/ServiceDetail.astro'
+import { entryPaths, translations } from '@/lib/i18n'
+
+export const getStaticPaths = () => entryPaths('services')
+
+const { locale, entry } = Astro.props
+---
+
+<Layout locale={locale} title={entry.data.title} description={entry.data.description} translated={await translations('services', entry.slug)}>
+  <ServiceDetail locale={locale} service={entry} />
+</Layout>

@@ -1,0 +1,57 @@
+{
+  "header": [
+    {
+      "label": "Ana sayfa",
+      "href": "/"
+    },
+    {
+      "label": "Kurumsal",
+      "href": "/about/",
+      "children": [
+        {
+          "label": "Hakkımızda",
+          "href": "/about/"
+        },
+        {
+          "label": "İletişim",
+          "href": "/contact/"
+        }
+      ]
+    },
+    {
+      "label": "Hizmetler",
+      "href": "/services/",
+      "type": "services"
+    },
+    {
+      "label": "Blog",
+      "href": "/blog/"
+    },
+    {
+      "label": "İletişim",
+      "href": "/contact/"
+    }
+  ],
+  "footer": [
+    {
+      "label": "Ana sayfa",
+      "href": "/"
+    },
+    {
+      "label": "Hakkımızda",
+      "href": "/about/"
+    },
+    {
+      "label": "Hizmetler",
+      "href": "/services/"
+    },
+    {
+      "label": "Blog",
+      "href": "/blog/"
+    },
+    {
+      "label": "İletişim",
+      "href": "/contact/"
+    }
+  ]
+}

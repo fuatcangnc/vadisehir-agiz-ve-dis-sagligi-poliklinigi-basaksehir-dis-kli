@@ -1,0 +1,75 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { render } from 'astro:content'
+import { ArrowRight, BadgeCheck, CircleCheck, FileCheck, Phone, ShieldCheck } from '@lucide/astro'
+import ProjectForm from './ProjectForm.astro'
+import SiteImage from './SiteImage.astro'
+import { href, localized, phoneHref, settings, siteText, whatsappHref } from '@/lib/i18n'
+
+interface Props { locale: string; service: CollectionEntry<'services'> & { slug: string } }
+const { locale, service } = Astro.props
+const t = await siteText(locale)
+const s = await settings()
+const { Content } = await render(service)
+const site = Astro.site ?? Astro.url.origin
+const servicesUrl = href(locale, '/services/')
+const related = (await localized('services', locale)).filter((item) => item.slug !== service.slug).slice(0, 3)
+const wa = whatsappHref(s.whatsapp, `${t.whatsapp.message} (${service.data.title})`)
+const icons = [BadgeCheck, FileCheck, ShieldCheck]
+---
+
+<main>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: t.nav.home, item: new URL(href(locale), site).href },
+          { '@type': 'ListItem', position: 2, name: t.nav.services, item: new URL(servicesUrl, site).href },
+          { '@type': 'ListItem', position: 3, name: service.data.title, item: new URL(Astro.url.pathname, site).href },
+        ],
+      },
+      { '@type': 'Service', name: service.data.title, description: service.data.description, provider: { '@type': 'LocalBusiness', name: s.brand, telephone: s.phone } },
+    ],
+  })} />
+
+  <section class="detail-hero relative overflow-hidden">
+    <div class="detail-hero__image"><SiteImage src={service.data.image} alt={service.data.title} fetchpriority="high" widths={[800, 1200]} sizes="60vw" /></div>
+    <div class="shell detail-hero__content">
+      <p class="eyebrow">{t.nav.services} · <bdi>{s.brand}</bdi></p>
+      <h1>{service.data.title}</h1>
+      <p class="detail-hero__summary">{service.data.description}</p>
+      <div class="detail-hero__actions">
+        <a class="button button--primary" href="#quote">{t.cta} <ArrowRight size={16} class="rtl:rotate-180" /></a>
+        <a class="button" style="border-color: var(--navy-soft); color: var(--navy-soft)" href={wa} target="_blank" rel="noreferrer">{t.whatsapp.ask}</a>
+      </div>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href={href(locale)}>{t.nav.home}</a>
+        <ArrowRight size={13} aria-hidden="true" class="rtl:rotate-180" />
+        <a href={servicesUrl}>{t.nav.services}</a>
+        <ArrowRight size={13} aria-hidden="true" class="rtl:rotate-180" />
+        <span>{service.data.title}</span>
+      </nav>
+    </div>
+    <div class="custom-divider-white-left absolute -bottom-[1px] left-0 z-20 pointer-events-none border-0 outline-none shadow-none" aria-hidden="true"></div>
+    <div class="custom-divider-white-right absolute -bottom-[1px] right-0 z-20 pointer-events-none border-0 outline-none shadow-none" aria-hidden="true"></div>
+  </section>
+
+  <section><div class="shell detail-layout">
+    <article class="detail-main">
+      <p class="section-kicker">{t.service.scope}</p>
+      <h2>{t.service.title}</h2>
+      <div class="post-content"><Content /></div>
+      <p>{t.service.body}</p>
+      <h3>{t.service.checks}</h3>
+      <ul>{t.service.checkItems.map((item) => <li>{item}</li>)}</ul>
+      <div class="process-band" style="margin-top: 2.5rem"><p class="section-kicker">{t.process.badge}</p><h2>{t.service.stepsTitle}</h2><div class="process-band__grid">{t.process.steps.map((step, i) => <div class="process-band__item"><span>0{i + 1}</span><h3>{step.title}</h3><p>{step.text}</p></div>)}</div></div>
+      <h3>{t.faq.title}</h3><div class="faq-list">{t.faq.items.map((f) => <details><summary>{f.question}<span><CircleCheck size={15} /></span></summary><p>{f.answer}</p></details>)}</div>
+    </article>
+    <aside class="detail-side"><div class="side-card"><p class="eyebrow"><ShieldCheck size={16} /> {t.service.sideKicker}</p><h2>{t.service.sideTitle}</h2><p>{t.service.sideText}</p><a class="button button--primary" href={wa} target="_blank" rel="noreferrer">{t.whatsapp.ask} <ArrowRight size={15} class="rtl:rotate-180" /></a><a class="button" style="width:100%; margin-top:.6rem; border:1px solid var(--line)" href={phoneHref(s.phone)}><Phone size={15} /> <bdi dir="ltr">{s.phone}</bdi></a><ul class="info-list">{t.service.sideList.map((item, i) => { const Icon = icons[i % icons.length]; return <li><Icon size={15} /> {item}</li> })}</ul></div></aside>
+  </div></section>
+
+  <section class="form-section" id="quote"><div class="shell form-section__panel"><SiteImage class="form-section__image" src="/images/office.webp" alt="" widths={[800, 1400]} sizes="100vw" /><div class="form-section__wash"></div><ProjectForm locale={locale} title={`${t.service.formTitle} ${service.data.title}`} /><div class="form-section__aside"><p class="eyebrow"><bdi>{s.brand}</bdi></p><h2>{t.service.formHeading}</h2><p>{t.service.formText}</p></div></div></section>
+  {related.length > 0 && <section class="services-section"><div class="shell"><div class="section-top"><div><p class="section-kicker">{t.service.related}</p><h2 class="section-heading">{t.service.relatedTitle}</h2></div><a href={servicesUrl}>{t.services.all} <ArrowRight size={16} class="rtl:rotate-180" /></a></div><div class="service-grid">{related.map((item) => { const url = href(locale, `/services/${item.slug}/`); return <article class="service-card"><a class="service-card__image" href={url}><SiteImage src={item.data.image} alt={item.data.title} loading="lazy" widths={[400, 600]} sizes="(min-width: 1024px) 33vw, 100vw" /></a><div class="service-card__body"><p class="service-card__category">{t.nav.services}</p><h3><a href={url}>{item.data.title}</a></h3><a class="text-link" href={url}>{t.services.more} <ArrowRight size={14} class="rtl:rotate-180" /></a></div></article> })}</div></div></section>}
+</main>

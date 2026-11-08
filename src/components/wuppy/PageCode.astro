@@ -1,0 +1,8 @@
+---
+// Body code of a page from WuppyCMS (Pages → Edit → Custom code); put it right before </body>.
+import { pageSettings } from './page-settings'
+
+const p = await pageSettings(Astro.routePattern)
+---
+
+{p.body && <Fragment set:html={p.body} />}

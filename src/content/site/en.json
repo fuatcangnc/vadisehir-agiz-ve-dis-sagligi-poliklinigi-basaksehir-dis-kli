@@ -1,0 +1,369 @@
+{
+  "nav": {
+    "home": "Home",
+    "company": "Clinic",
+    "about": "About us",
+    "services": "Treatments",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "cta": "Book an appointment",
+  "topbar": "Dental care for families in Başakşehir. Appointments 7 days a week.",
+  "whatsapp": {
+    "message": "Hello, I would like to ask about an appointment.",
+    "online": "Online",
+    "help": "Need help?",
+    "ask": "Ask on WhatsApp"
+  },
+  "hero": {
+    "eyebrow": "Check-ups · Treatments · Appointments",
+    "title": "Healthy teeth for",
+    "accent": "the whole family",
+    "text": "A dental clinic in Başakşehir. We examine, explain and treat — from a simple filling to root canal treatment — with a gentle hand and a clear plan.",
+    "primary": "Book a free first visit",
+    "rating": "5 stars from 71 Google reviews",
+    "panel": "How a visit works",
+    "status": "On track"
+  },
+  "highlights": [
+    "Free first examination",
+    "Clear treatment plan",
+    "Follow-up after treatment"
+  ],
+  "metrics": [
+    {
+      "value": "5",
+      "label": "Google rating"
+    },
+    {
+      "value": "71",
+      "label": "Google reviews"
+    },
+    {
+      "value": "7",
+      "label": "Days a week"
+    }
+  ],
+  "services": {
+    "badge": "What we do",
+    "title": "Treatments that",
+    "accent": "keep you smiling",
+    "intro": "From a routine check-up to fillings, root canals and gum care — all under one roof.",
+    "more": "Learn more",
+    "all": "See all treatments",
+    "help": "Not sure what you need? Come in for a check-up and we will tell you.",
+    "details": "details",
+    "count": "treatments"
+  },
+  "pillars": {
+    "badge": "Two ways we help",
+    "title": "Treatments and",
+    "accent": "practical advice",
+    "text": "Choose what you need today: an appointment with our dentists, or free articles you can read at home.",
+    "view": "View",
+    "items": [
+      {
+        "title": "Our treatments",
+        "subtitle": "Done together with you",
+        "tag": "Patients",
+        "text": "Our dentists examine you, explain the options and treat only what is needed.",
+        "list": "Popular treatments",
+        "bullets": [
+          "Free first examination",
+          "Clear treatment plan",
+          "One dentist you know"
+        ],
+        "action": "See all treatments"
+      },
+      {
+        "title": "Guides & advice",
+        "subtitle": "Read at your own pace",
+        "tag": "Free articles",
+        "text": "Short, practical articles on brushing, gum health and what to expect at the dentist.",
+        "list": "Latest articles",
+        "bullets": [
+          "Practical tips",
+          "Real examples",
+          "Updated regularly"
+        ],
+        "action": "Read the blog"
+      }
+    ]
+  },
+  "why": {
+    "badge": "Why choose us",
+    "title": "Why patients come to us",
+    "text": "Careful work, honest explanations and a team that takes the fear out of the dentist.",
+    "features": [
+      {
+        "title": "Gentle dentists",
+        "text": "Patients tell us the treatment was painless and the hand was light."
+      },
+      {
+        "title": "Clear process",
+        "text": "You know what happens next and why it is needed."
+      },
+      {
+        "title": "Fast response",
+        "text": "Write to us on WhatsApp and we will get back to you."
+      },
+      {
+        "title": "Care that lasts",
+        "text": "We try to save your own teeth before anything else."
+      }
+    ],
+    "stats": [
+      {
+        "value": 5,
+        "suffix": "",
+        "label": "Rating",
+        "text": "On Google, from our patients."
+      },
+      {
+        "value": 71,
+        "suffix": "",
+        "label": "Reviews",
+        "text": "Written by people we treated."
+      },
+      {
+        "value": 4,
+        "suffix": "",
+        "label": "Steps",
+        "text": "From the first check-up to follow-up."
+      },
+      {
+        "value": 7,
+        "suffix": "",
+        "label": "Days",
+        "text": "A week we take appointments."
+      }
+    ]
+  },
+  "process": {
+    "badge": "How it works",
+    "title": "From the first call to a healthy smile",
+    "text": "A simple process that keeps every visit calm and clear.",
+    "kicker": "Free first examination",
+    "center": "Let's talk about your teeth",
+    "action": "Message us",
+    "steps": [
+      {
+        "title": "Examination",
+        "text": "We listen, look at your teeth and take an X-ray if needed."
+      },
+      {
+        "title": "Plan",
+        "text": "You hear the options, the steps and the cost before we start."
+      },
+      {
+        "title": "Treatment",
+        "text": "Your dentist does the work, gently and without rushing."
+      },
+      {
+        "title": "Follow-up",
+        "text": "We check the result and tell you how to keep it that way."
+      }
+    ]
+  },
+  "testimonials": {
+    "badge": "Patient stories",
+    "title": "Real feedback.",
+    "accent": "Real results.",
+    "text": "What our patients say about their visits.",
+    "see": "See reviews on Google",
+    "source": "Google review",
+    "verified": "Verified",
+    "prev": "Previous review",
+    "next": "Next review",
+    "items": [
+      {
+        "name": "Google user",
+        "role": "bir yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "Diş tedavisi için Seyma hnm ilgilendi. Başlangıçta tereddüt etmeme rağmen tüm işlem acısız ve sıkıntısız oldu. Diğer Diş klnikleri ile aralarındaki fark Şeyma hnmın kalan dişleri çekmek istemeyip son ana kadar kurtarmak istemeseydi. Yapılan işlem ücretlerin ise bi tık daha yüksek olması diğer kliniklere göre 😉\nSonuç olarak güvenle gidebilirsiniz.",
+        "rating": 5
+      },
+      {
+        "name": "Google user",
+        "role": "bir yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "İnternetteki yorumları okuyarak gittim.Ben Şeyma Hn'ın yaşı genç olduğu için açıkçası tereddüt ederek gittim ama tereddüte gerek yokmuş. Dt. Şeyma Hanım hem güzelce açıklıyor, hem eli hafifti, hem özenli güzel yapıyor, hem de indirim uyguluyor.  Eline koluna sağlık. İnşaAllah yeni dişçim o artık :)",
+        "rating": 5
+      },
+      {
+        "name": "Google user",
+        "role": "bir yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "Kurumda çalışanlar güler yüzlü, nazik ve ilgililer. Doktorum Şeyma Şimşek çok memnunum. Normalde dişçiye gitmekten korkardım. Eli çok hafif ve normalde başka yerde çekilecek denilen dişleri kurtarmakla üstüne yok. İşinde cok başarılı bir hekim. Herkese tavsiye ederim.",
+        "rating": 5
+      },
+      {
+        "name": "Google user",
+        "role": "2 yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "Kardeşimle birlikte dişle ilgili tüm işlemleri (normal ve estetik dolgu, kanal tedavisi, diş eti iltihabı tedavisi, diş beyazlatma vs) Vadisehir Ağız ve Diş Sağlığı Polikliniğinde yaptırdık ve çok memnun kaldık. Diş hekimi Merve Hanım oldukça ilgili, hayatımdaki en detaylı diş muayenesini kendisinde oldum. Merak ettiğiniz tüm soruları cevaplayıp gerekli bilgilendirmeyi sağlamakta. Dişlerim konusunda gönül rahatlığıyla gittiğim tek yer.",
+        "rating": 5
+      },
+      {
+        "name": "Google user",
+        "role": "2 yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "Vadişehie diş kliniğine tavsiye üzerine geldim. Doktorlarımız ve ekip çok ilgililer ilk girişten itibaren ilgi ve alakalarını hiç eksik etmediler. Her konu da yardımcı olup memnun etmek için ellerinden gelenin fazlasını yaptılar. Temizlik ve hijyen açısından da çok titiz ve temiz bir klinik. Tavsiye üzerine geldiğim ve çok memnun kaldığım vadişehir diş kliniğini ben de gitmek isteyen ve kendine iyi bir dişçi arayan herkese kesinlikle tavsiye ederim. Her şey için teşekkür ederim.",
+        "rating": 5
+      }
+    ]
+  },
+  "quote": {
+    "badge": "Appointment",
+    "title": "Tell us what you need",
+    "accent": "and book a visit",
+    "text": "Send a few details and we will reply with a time for your appointment.",
+    "steps": [
+      {
+        "title": "Reply the same day",
+        "text": "We read your message and answer with available times."
+      },
+      {
+        "title": "Clear plan and cost",
+        "text": "After the examination you see the full plan before we start."
+      },
+      {
+        "title": "No obligation",
+        "text": "The first examination is free."
+      }
+    ],
+    "hotline": "Direct line"
+  },
+  "form": {
+    "eyebrow": "Appointment",
+    "title": "Request an appointment",
+    "text": "Tell us what you need and we will get back to you shortly.",
+    "name": "Full name",
+    "namePlaceholder": "Your name",
+    "phone": "Phone",
+    "company": "How did you hear about us?",
+    "companyPlaceholder": "Google, a friend...",
+    "service": "Treatment",
+    "choose": "Choose a treatment",
+    "details": "Your complaint",
+    "detailsPlaceholder": "Tell us briefly what bothers you...",
+    "consent": "I agree that my details are used to arrange an appointment.",
+    "send": "Send via WhatsApp",
+    "safe": "Your data is safe",
+    "reply": "Average reply: same day",
+    "sent": "Opening WhatsApp with your request...",
+    "heading": "New appointment request"
+  },
+  "blog": {
+    "badge": "Advice",
+    "title": "Blog",
+    "intro": "Tips on teeth, gums and visits to the dentist.",
+    "readMore": "Read more",
+    "all": "All articles",
+    "related": "Related articles",
+    "summary": "Summary",
+    "consultTitle": "Have a question about this topic?",
+    "consultText": "Send us a message and our team will be happy to help.",
+    "consultAction": "Ask us"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Frequently asked questions",
+    "text": "Quick answers to the questions we hear most.",
+    "items": [
+      {
+        "question": "How do I make an appointment?",
+        "answer": "Send us a message or give us a call. We find a time that suits you, 7 days a week."
+      },
+      {
+        "question": "What does a treatment cost?",
+        "answer": "It depends on what is needed. After the examination we explain the options and the cost before we start."
+      },
+      {
+        "question": "Does it hurt?",
+        "answer": "Most patients tell us it was painless. We work gently and numb the area when needed."
+      },
+      {
+        "question": "Can you save my tooth instead of pulling it?",
+        "answer": "We always try to keep your own teeth. Extraction is the last option, not the first."
+      }
+    ],
+    "bannerTitle": "Have a question?",
+    "bannerAccent": "Talk to our team.",
+    "bannerText": "Send us a message and we will answer quickly."
+  },
+  "ctaBanner": {
+    "eyebrow": "Let's take care of it",
+    "title": "Ready for a healthy smile?",
+    "text": "Tell us what bothers you and we will find a time for your visit.",
+    "help": "Need help?",
+    "call": "Call us"
+  },
+  "about": {
+    "eyebrow": "Clinic",
+    "title": "About us",
+    "intro": "Vadişehir Ağız ve Diş Sağlığı Polikliniği is a dental clinic in Başakşehir, İstanbul.",
+    "kicker": "Our approach",
+    "heading": "We explain first, then we treat.",
+    "body": "Our dentists look at your teeth, answer your questions and agree on a plan with you. We try to save your own teeth, we work gently, and we tell you what it costs before we begin.",
+    "principles": "Our principles",
+    "principlesTitle": "The same four principles with every patient.",
+    "band": "Let's make the right decision about your teeth together."
+  },
+  "service": {
+    "scope": "What's included",
+    "title": "Get it checked early.",
+    "body": "Every visit starts with an examination of your teeth and gums and a talk about your complaint. Then we agree on a plan, so you know exactly what will be done.",
+    "checks": "What we look at",
+    "checkItems": [
+      "Your teeth, gums and any pain",
+      "Old fillings and crowns",
+      "X-rays when they are needed",
+      "Next steps and what each one costs"
+    ],
+    "stepsTitle": "Four steps, no surprises.",
+    "sideKicker": "Gentle care",
+    "sideTitle": "Let's find the right treatment for you.",
+    "sideText": "Share a few details and we will get back to you with a time for your visit.",
+    "sideList": [
+      "Free first examination",
+      "Plan and cost before we start",
+      "One dentist you know"
+    ],
+    "related": "More treatments",
+    "relatedTitle": "Related treatments.",
+    "formTitle": "Book a visit:",
+    "formHeading": "Let's plan your treatment together.",
+    "formText": "We look at your teeth, explain the options and agree on the cost before we start."
+  },
+  "contact": {
+    "eyebrow": "Contact & appointment",
+    "title": "Contact",
+    "intro": "Have a question or need an appointment? Write to us and we will reply as soon as we can.",
+    "kicker": "Contact",
+    "heading": "Send us a message.",
+    "text": "Tell us what bothers you and our team will get back to you.",
+    "office": "Our clinic",
+    "phoneEmail": "Phone & email",
+    "hours": "Opening hours",
+    "hoursValue": "7 days a week",
+    "closed": "By appointment",
+    "phone": "Phone",
+    "email": "Email"
+  },
+  "footer": {
+    "tagline": "Dental care for families in Başakşehir: check-ups, fillings, root canals and gum treatment.",
+    "rights": "All rights reserved.",
+    "contact": "Contact & clinic",
+    "trust": [
+      "Free first examination",
+      "Clear treatment plan",
+      "Gentle care"
+    ]
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The page you are looking for does not exist or has moved.",
+    "home": "Back to home"
+  }
+}

@@ -1,0 +1,176 @@
+---
+import { ArrowRight, Check, Clock3, ShieldCheck } from '@lucide/astro'
+import { render, type CollectionEntry } from 'astro:content'
+import BlogCard from './BlogCard.astro'
+import SiteImage from './SiteImage.astro'
+import { tag } from '@/components/i18n/languages'
+import { href, localized, settings, siteText, whatsappHref } from '@/lib/i18n'
+
+interface Props { locale: string; post: CollectionEntry<'posts'> & { slug: string } }
+const { locale, post } = Astro.props
+const t = await siteText(locale)
+const s = await settings()
+const { Content } = await render(post)
+const date = new Intl.DateTimeFormat(tag(locale), { day: '2-digit', month: 'long', year: 'numeric' }).format(post.data.publishedAt)
+const wa = whatsappHref(s.whatsapp, `${t.whatsapp.message} (${post.data.title})`)
+const relatedPosts = (await localized('posts', locale)).filter((p) => p.slug !== post.slug).slice(0, 3)
+const site = Astro.site ?? Astro.url.origin
+const blogUrl = href(locale, '/blog/')
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: t.nav.home, item: new URL(href(locale), site).href },
+        { '@type': 'ListItem', position: 2, name: t.blog.title, item: new URL(blogUrl, site).href },
+        { '@type': 'ListItem', position: 3, name: post.data.title, item: new URL(Astro.url.pathname, site).href },
+      ],
+    },
+    { '@type': 'BlogPosting', headline: post.data.title, description: post.data.description, datePublished: post.data.publishedAt.toISOString(), inLanguage: locale, publisher: { '@type': 'Organization', name: s.brand } },
+  ],
+})} />
+
+<section class="relative isolate min-h-[32rem] overflow-hidden bg-[#f4f4f4]">
+  <div class="absolute inset-0 z-0 overflow-hidden">
+    <SiteImage src={post.data.image} alt="" class="size-full object-cover object-center" loading="eager" fetchpriority="high" widths={[800, 1400]} sizes="100vw" />
+  </div>
+  <div class="absolute inset-0 z-10 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.85)_100%)] lg:bg-[linear-gradient(90deg,#ffffff_0%,rgba(255,255,255,0.96)_35%,rgba(255,255,255,0.82)_60%,rgba(255,255,255,0.45)_85%,rgba(255,255,255,0.25)_100%)] rtl:lg:bg-[linear-gradient(270deg,#ffffff_0%,rgba(255,255,255,0.96)_35%,rgba(255,255,255,0.82)_60%,rgba(255,255,255,0.45)_85%,rgba(255,255,255,0.25)_100%)]" aria-hidden="true"></div>
+
+  <div class="shell relative z-20 grid min-h-[32rem] items-center gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_25rem] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_27rem]">
+    <div class="max-w-3xl">
+      <nav class="mb-3 flex items-center gap-2 text-xs font-semibold text-neutral-500" aria-label="Breadcrumb">
+        <a href={href(locale)} class="hover:text-primary transition-colors">{t.nav.home}</a>
+        <span aria-hidden="true">/</span>
+        <a href={blogUrl} class="hover:text-primary transition-colors">{t.blog.title}</a>
+        <span aria-hidden="true">/</span>
+        <span class="text-neutral-900 line-clamp-1">{post.data.title}</span>
+      </nav>
+
+      <span class="text-[13px] font-bold uppercase tracking-[0.14em] text-primary">{post.data.category} · <bdi>{s.brand}</bdi></span>
+      <h1 class="mt-3 text-[clamp(2.2rem,3.8vw,3.6rem)] font-black leading-[1.03] tracking-[-0.05em] text-neutral-950">{post.data.title}</h1>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-neutral-700">{post.data.description}</p>
+
+      <div class="mt-4 flex items-center gap-3 text-xs font-bold text-neutral-500">
+        <span class="inline-flex items-center gap-1.5 bg-neutral-200/80 px-2.5 py-1 text-neutral-800"><Clock3 size={13} class="text-primary" /> {date}</span>
+        <span class="inline-flex items-center gap-1.5 bg-neutral-200/80 px-2.5 py-1 text-neutral-800"><ShieldCheck size={13} class="text-primary" /> <bdi>{s.brand}</bdi></span>
+      </div>
+
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <a href={wa} target="_blank" rel="noreferrer" class="inline-flex h-11 items-center gap-2.5 bg-[#25D366] hover:bg-[#1fb65a] px-5 text-xs font-black uppercase tracking-wider text-white shadow-sm transition-colors">
+          <span>{t.whatsapp.ask}</span>
+          <ArrowRight size={15} class="rtl:rotate-180" />
+        </a>
+        <a href={href(locale, '/contact/')} class="inline-flex h-11 items-center gap-2 border border-neutral-900 bg-white/90 hover:bg-neutral-950 hover:text-white px-5 text-xs font-black uppercase tracking-wider text-neutral-950 transition-colors">
+          <span>{t.nav.contact}</span>
+          <ArrowRight size={15} class="rtl:rotate-180" />
+        </a>
+      </div>
+    </div>
+
+    <form id="post-quick-form" data-whatsapp={s.whatsapp} data-message={`${t.form.heading} · ${post.data.title}`} class="relative z-10 w-full max-w-[27rem] justify-self-end border-t-[3px] border-primary bg-white p-5 text-[#1a1a1a] shadow-[0_20px_50px_rgba(4,24,39,0.14)] sm:p-6">
+      <div class="border-b border-neutral-200 pb-3">
+        <p class="text-[11px] font-black uppercase tracking-[0.16em] text-primary">{t.form.eyebrow}</p>
+        <h2 class="mt-1 text-[17px] font-black tracking-tight text-neutral-950 sm:text-[19px]">{t.form.title}</h2>
+      </div>
+      <p class="mt-2.5 text-xs leading-5 text-neutral-600">{t.form.text}</p>
+      <div class="mt-3.5 space-y-2.5">
+        <div>
+          <label for="post-quick-fullName" class="block text-[11px] font-bold uppercase tracking-wider text-neutral-700">{t.form.name}</label>
+          <input id="post-quick-fullName" type="text" name="fullName" required autocomplete="name" placeholder={t.form.namePlaceholder} class="mt-1 h-9 w-full rounded-none border border-neutral-300 bg-[#f9f9f9] px-3 text-xs text-neutral-900 outline-none transition focus:border-primary focus:bg-white" />
+        </div>
+        <div>
+          <label for="post-quick-phone" class="block text-[11px] font-bold uppercase tracking-wider text-neutral-700">{t.form.phone}</label>
+          <input id="post-quick-phone" type="tel" name="phone" required autocomplete="tel" dir="ltr" class="mt-1 h-9 w-full rounded-none border border-neutral-300 bg-[#f9f9f9] px-3 text-xs text-neutral-900 outline-none transition focus:border-primary focus:bg-white" />
+        </div>
+      </div>
+      <button type="submit" class="mt-4 inline-flex h-12 w-full items-center justify-center gap-2 border-0 bg-[#25D366] hover:bg-[#1fb65a] px-4 text-[15px] font-bold text-white transition-colors cursor-pointer">
+        <span>{t.form.send}</span>
+        <ArrowRight size={18} class="rtl:rotate-180" />
+      </button>
+      <div class="mt-3 flex items-center justify-between border-t border-neutral-100 pt-2.5 text-[11px] text-neutral-500">
+        <span class="inline-flex items-center gap-1 font-semibold text-emerald-700"><Check size={13} /> {t.form.safe}</span>
+        <span>{t.form.reply}</span>
+      </div>
+    </form>
+  </div>
+
+  <div class="custom-divider-white-left absolute -bottom-[1px] left-0 z-20 pointer-events-none border-0 outline-none shadow-none" aria-hidden="true"></div>
+  <div class="custom-divider-white-right absolute -bottom-[1px] right-0 z-20 pointer-events-none border-0 outline-none shadow-none" aria-hidden="true"></div>
+</section>
+
+<article class="bg-white py-14 md:py-20 text-neutral-900">
+  <div class="shell max-w-5xl">
+    <div class="border-b border-neutral-200 pb-10">
+      <p class="text-base font-bold uppercase tracking-[0.14em] text-primary">01 · {t.blog.summary}</p>
+      <h2 class="mt-4 text-[clamp(2rem,4vw,3.2rem)] font-black leading-[1.03] tracking-[-0.05em] text-neutral-950">{post.data.title}</h2>
+      <p class="mt-6 text-base sm:text-lg leading-relaxed text-neutral-700">{post.data.description}</p>
+      <figure class="mt-10 overflow-hidden border border-neutral-200 bg-[#f7f8f8] shadow-sm">
+        <SiteImage src={post.data.image} alt={post.data.title} class="h-auto w-full aspect-[16/9] object-cover" widths={[800, 1280]} sizes="(min-width: 1024px) 64rem, 100vw" width="1280" height="720" />
+      </figure>
+    </div>
+
+    <div class="post-content mt-12">
+      <Content />
+    </div>
+
+    <section class="mt-16 border-t border-neutral-200 pt-12">
+      <p class="text-[13px] font-bold uppercase tracking-[0.14em] text-primary">02 · {t.process.badge}</p>
+      <h2 class="mt-3 text-[clamp(1.8rem,3.5vw,2.65rem)] font-black leading-tight tracking-tight text-neutral-950">{t.process.title}</h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {t.process.steps.map((step, i) => (
+          <div class="border border-neutral-200 bg-[#f7f8f8] p-6 flex flex-col">
+            <span class="font-mono text-xs font-black text-primary">0{i + 1}</span>
+            <h3 class="mt-2 text-base font-bold text-neutral-950">{step.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-neutral-600">{step.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <div class="mt-14 border-s-4 border-primary bg-[#fff7ed] p-6 sm:p-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+        <div>
+          <h3 class="text-xl font-black uppercase text-neutral-950">{t.blog.consultTitle}</h3>
+          <p class="mt-1 text-sm text-neutral-700">{t.blog.consultText}</p>
+        </div>
+        <a class="inline-flex h-11 items-center justify-center gap-2 bg-primary px-6 text-xs font-black uppercase tracking-wider text-white hover:bg-neutral-950 transition-colors shrink-0 whitespace-nowrap" href={wa} target="_blank" rel="noreferrer">
+          <span>{t.blog.consultAction}</span>
+          <ArrowRight size={15} class="rtl:rotate-180" />
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
+
+{relatedPosts.length > 0 && (
+  <section class="border-t border-neutral-200 bg-[#f8f9fa] py-16">
+    <div class="shell">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-neutral-200 pb-6">
+        <div>
+          <span class="text-xs font-black uppercase tracking-widest text-primary">{t.blog.badge}</span>
+          <h2 class="mt-2 text-2xl sm:text-3xl font-black uppercase text-neutral-950 tracking-tight">{t.blog.related}</h2>
+        </div>
+        <a href={blogUrl} class="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-primary hover:text-neutral-950 transition-colors">
+          <span>{t.blog.all}</span>
+          <ArrowRight size={16} class="rtl:rotate-180" />
+        </a>
+      </div>
+      <div class="blog-grid mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {relatedPosts.map((p, index) => <BlogCard locale={locale} post={p} index={index + 1} />)}
+      </div>
+    </div>
+  </section>
+)}
+
+<script>
+  const form = document.getElementById('post-quick-form') as HTMLFormElement | null
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault()
+    const data = new FormData(form)
+    const message = `${form.dataset.message}\n${data.get('fullName')}\n${data.get('phone')}`
+    window.open(`https://wa.me/${form.dataset.whatsapp}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer')
+  })
+</script>

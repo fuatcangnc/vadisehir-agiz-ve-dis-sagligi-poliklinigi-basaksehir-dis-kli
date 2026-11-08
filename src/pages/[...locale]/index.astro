@@ -1,0 +1,15 @@
+---
+import Home from '@/components/Home.astro'
+import { DEFAULT_LOCALE, href, localePaths, locales, prefixDefault } from '@/lib/i18n'
+
+export const getStaticPaths = async () => [
+  ...(await localePaths()),
+  // With the default locale in the path, `/` only sends visitors on to it.
+  ...(prefixDefault ? [{ params: { locale: undefined }, props: { locale: DEFAULT_LOCALE, redirect: true } }] : []),
+]
+
+const { locale, redirect } = Astro.props as { locale: string; redirect?: boolean }
+if (redirect) return Astro.redirect(href(locale))
+---
+
+<Home locale={locale} translated={await locales()} />

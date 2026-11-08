@@ -1,0 +1,16 @@
+---
+import { Compass, FileCheck, Scale, ShieldCheck } from '@lucide/astro'
+import Layout from '@/layouts/Layout.astro'
+import InternalHero from '@/components/InternalHero.astro'
+import SiteImage from '@/components/SiteImage.astro'
+import { href, localePaths, locales, settings, siteText } from '@/lib/i18n'
+
+export const getStaticPaths = localePaths
+
+const { locale } = Astro.props
+const t = await siteText(locale)
+const s = await settings()
+const icons = [Scale, FileCheck, Compass, ShieldCheck]
+---
+
+<Layout locale={locale} title={t.about.title} description={t.about.intro} translated={await locales()}><main><InternalHero locale={locale} eyebrow={t.about.eyebrow} title={t.about.title} description={t.about.intro} /><section class="prose-section"><div class="shell" style="display:grid; gap:3rem; align-items:center"><div style="max-width:42rem"><h3 class="section-kicker">{t.about.kicker}</h3><h2 class="section-heading">{t.about.heading}</h2>{t.about.body.split(/\n\n+/).map((p) => <p class="section-lead">{p}</p>)}<a class="button button--primary" href={href(locale, '/contact/')} style="margin-top:1.5rem">{t.cta}</a></div><SiteImage src="/images/about.webp" alt={t.about.title} style="width:100%; max-height:30rem; object-fit:cover" /></div></section><section class="process-section"><div class="shell"><h3 class="section-kicker">{t.about.principles}</h3><h2 class="section-heading">{t.about.principlesTitle}</h2><div class="service-grid" style="margin-top:2rem">{t.why.features.map((f, i) => { const Icon = icons[i % icons.length]; return <article class="service-card" style="padding:1.5rem"><Icon size={28} color="var(--primary)" /><h3 style="margin-top:1.5rem">{f.title}</h3><p style="color:var(--muted);line-height:1.7;font-size:.8rem">{f.text}</p></article> })}</div></div></section><section class="dark-band"><div class="shell dark-band__grid"><div><h3 class="eyebrow"><bdi>{s.brand}</bdi></h3><h2>{t.about.band}</h2></div><a class="dark-band__link" href={href(locale, '/contact/')}>{t.nav.contact} <span class="rtl:rotate-180">→</span></a></div></section></main></Layout>

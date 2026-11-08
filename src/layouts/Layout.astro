@@ -1,0 +1,67 @@
+---
+import '@/styles/globals.css'
+import { Font } from 'astro:assets'
+import PageSeo from '@/components/wuppy/PageSeo.astro'
+import PageCode from '@/components/wuppy/PageCode.astro'
+import { pageSettings } from '@/components/wuppy/page-settings'
+import SiteHeader from '@/components/SiteHeader.astro'
+import SiteFooter from '@/components/SiteFooter.astro'
+import FloatingWhatsApp from '@/components/FloatingWhatsApp.astro'
+import WuppycmsBridge from '@/components/WuppycmsBridge.astro'
+import Hreflang from '@/components/i18n/Hreflang.astro'
+import { tag } from '@/components/i18n/languages'
+import { dir, settings, siteText } from '@/lib/i18n'
+
+interface Props {
+  locale: string
+  title?: string
+  description?: string
+  /** Locales this page exists in (language switcher and hreflang). */
+  translated?: string[]
+}
+
+const { locale, translated } = Astro.props
+const s = await settings()
+const t = await siteText(locale)
+const rawTitle = Astro.props.title && Astro.props.title !== s.brand ? `${Astro.props.title} | ${s.brand}` : s.brand
+const rawDescription = Astro.props.description ?? t.hero.text
+const title = rawTitle.length > 60 ? `${rawTitle.slice(0, 57).trimEnd()}...` : rawTitle
+const description = rawDescription.length > 155 ? `${rawDescription.slice(0, 152).trimEnd()}...` : rawDescription
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
+// "Exclude this page from site search" in WuppyCMS.
+const searchExcluded = (await pageSettings(Astro.routePattern)).search?.exclude
+---
+
+<!doctype html>
+<html lang={tag(locale)} dir={dir(locale)}>
+  <head>
+    <meta charset="UTF-8" />
+    <Font cssVariable="--font-sans" preload />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#121820" />
+    <PageSeo
+      title={title}
+      description={description}
+      canonical={canonical}
+      image="/og-image.png"
+      siteName={s.brand}
+      locale={tag(locale).replace('-', '_')}
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Hreflang translated={translated} />
+  </head>
+  <body class="font-sans" data-pagefind-ignore={searchExcluded ? 'all' : undefined}>
+    <SiteHeader locale={locale} translated={translated} />
+    <slot />
+    <SiteFooter locale={locale} />
+    <FloatingWhatsApp locale={locale} />
+    <WuppycmsBridge />
+    <PageCode />
+    <script is:inline>
+      const loadInit = () => import('/scripts/motion-init.js')
+      window.addEventListener('scroll', loadInit, { once: true, passive: true })
+      window.addEventListener('pointerdown', loadInit, { once: true })
+      window.addEventListener('keydown', loadInit, { once: true })
+    </script>
+  </body>
+</html>

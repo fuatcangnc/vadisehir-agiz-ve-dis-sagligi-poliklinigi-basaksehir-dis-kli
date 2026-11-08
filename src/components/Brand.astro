@@ -1,0 +1,21 @@
+---
+import { href, settings } from '@/lib/i18n'
+
+interface Props {
+  locale: string
+  inverse?: boolean
+}
+
+const { locale, inverse = false } = Astro.props
+const { brand } = await settings()
+---
+
+<a aria-label={brand} class="inline-flex items-center group/brand py-1" href={href(locale)}>
+  <span
+    class={`text-lg sm:text-xl md:text-2xl font-black tracking-[-0.04em] transition-colors duration-300 ${
+      inverse ? 'text-white' : 'text-foreground group-data-[sticky=true]/header:text-white'
+    }`}
+  >
+    <bdi>{brand}</bdi>
+  </span>
+</a>

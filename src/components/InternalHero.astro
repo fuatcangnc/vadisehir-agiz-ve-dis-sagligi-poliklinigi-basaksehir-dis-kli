@@ -1,0 +1,36 @@
+---
+import { ArrowRight } from '@lucide/astro'
+import SiteImage from './SiteImage.astro'
+import { href, siteText } from '@/lib/i18n'
+
+interface Props { locale: string; eyebrow: string; title: string; description: string; image?: string; breadcrumbTitle?: string }
+const { locale, eyebrow, title, description, image = '/images/page-hero.webp', breadcrumbTitle } = Astro.props
+const t = await siteText(locale)
+const breadcrumbLabel = breadcrumbTitle || eyebrow
+const site = Astro.site ?? Astro.url.origin
+---
+
+<section class="internal-hero relative">
+  <div class="internal-hero__image"><SiteImage src={image} alt="" fetchpriority="high" widths={[800, 1400]} sizes="100vw" /></div>
+  <div class="internal-hero__wash"></div>
+  <div class="shell internal-hero__content">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>{title}</h1>
+    <p class="internal-hero__description">{description}</p>
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href={href(locale)}>{t.nav.home}</a>
+      <ArrowRight size={13} aria-hidden="true" class="rtl:rotate-180" />
+      <span>{breadcrumbLabel}</span>
+    </nav>
+  </div>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: t.nav.home, item: new URL(href(locale), site).href },
+      { '@type': 'ListItem', position: 2, name: breadcrumbLabel, item: new URL(Astro.url.pathname, site).href },
+    ],
+  })} />
+  <div class="custom-divider-white-left absolute -bottom-[1px] left-0 z-20 pointer-events-none border-0 outline-none shadow-none" aria-hidden="true"></div>
+  <div class="custom-divider-white-right absolute -bottom-[1px] right-0 z-20 pointer-events-none border-0 outline-none shadow-none" aria-hidden="true"></div>
+</section>

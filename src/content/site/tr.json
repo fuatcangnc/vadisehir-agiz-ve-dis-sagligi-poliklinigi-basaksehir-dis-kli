@@ -1,0 +1,369 @@
+{
+  "nav": {
+    "home": "Ana sayfa",
+    "company": "Kurumsal",
+    "about": "Hakkımızda",
+    "services": "Tedaviler",
+    "blog": "Blog",
+    "contact": "İletişim"
+  },
+  "cta": "Randevu alın",
+  "topbar": "Başakşehir'de ağız ve diş sağlığı polikliniği.",
+  "whatsapp": {
+    "message": "Merhaba, randevu almak istiyorum.",
+    "online": "Çevrimiçi",
+    "help": "Yardım mı lazım?",
+    "ask": "WhatsApp'tan yazın"
+  },
+  "hero": {
+    "eyebrow": "Ağız ve diş sağlığı · Başakşehir",
+    "title": "Diş sağlığınız",
+    "accent": "güvenli ellerde olsun",
+    "text": "Dt. Merve Baykal ve ekibi; muayeneden tedaviye kadar her adımı sakin ve anlaşılır biçimde yürütür. Önce dinler, detaylı inceler, sonra anlatır.",
+    "primary": "Randevu alın",
+    "rating": "Google'da 71 yorumun tamamı 5 yıldız",
+    "panel": "Nasıl ilerliyoruz",
+    "status": "Planlandığı gibi"
+  },
+  "highlights": [
+    "Detaylı ilk muayene",
+    "Acısız işlem",
+    "Kontrol randevusu"
+  ],
+  "metrics": [
+    {
+      "value": "5",
+      "label": "Google puanı"
+    },
+    {
+      "value": "71",
+      "label": "Google yorumu"
+    },
+    {
+      "value": "4",
+      "label": "Adımda tedavi planı"
+    }
+  ],
+  "services": {
+    "badge": "Tedavilerimiz",
+    "title": "Ağız ve diş sağlığınız için",
+    "accent": "tedaviler",
+    "intro": "Muayeneden dolguya, kanal tedavisinden diş eti bakımına kadar ihtiyacınız olan her şey.",
+    "more": "Detaylı bilgi",
+    "all": "Tüm tedaviler",
+    "help": "Nereden başlayacağınızdan emin değil misiniz? Muayenede birlikte karar verelim.",
+    "details": "detay",
+    "count": "tedavi"
+  },
+  "pillars": {
+    "badge": "İki şekilde yardımcı oluyoruz",
+    "title": "Klinikte tedavi ve",
+    "accent": "evde bakım rehberleri",
+    "text": "Bugün neye ihtiyacınız varsa onu seçin: klinikte hekiminizle birebir tedavi ya da kendi başınıza kullanabileceğiniz bakım önerileri.",
+    "view": "İncele",
+    "items": [
+      {
+        "title": "Tedavilerimiz",
+        "subtitle": "Hekiminizle birlikte",
+        "tag": "Hastalar",
+        "text": "Muayeneden tedavinin sonuna kadar hekiminiz yanınızda; her adımı önceden anlatır.",
+        "list": "Sık yapılan tedaviler",
+        "bullets": [
+          "Detaylı muayene",
+          "Acısız işlem",
+          "Tek hekim takibi"
+        ],
+        "action": "Tüm tedaviler"
+      },
+      {
+        "title": "Bakım rehberleri",
+        "subtitle": "Kendi hızınızda okuyun",
+        "tag": "Ücretsiz bilgiler",
+        "text": "En sık duyduğumuz sorulara kısa ve pratik yanıtlar.",
+        "list": "Son yazılar",
+        "bullets": [
+          "Pratik ipuçları",
+          "Günlük bakım",
+          "Düzenli güncellenir"
+        ],
+        "action": "Blogu okuyun"
+      }
+    ]
+  },
+  "why": {
+    "badge": "Neden biz",
+    "title": "Hastalar neden bize geliyor",
+    "text": "Açık anlatım, özenli çalışma ve tedavi sonrası takip.",
+    "features": [
+      {
+        "title": "Titiz hijyen",
+        "text": "Klinik temizliğine özen gösteriyoruz."
+      },
+      {
+        "title": "Net süreç",
+        "text": "Hangi işlemin neden yapıldığını bilirsiniz."
+      },
+      {
+        "title": "Hızlı yanıt",
+        "text": "Randevu ve sorularınıza kısa sürede dönüyoruz."
+      },
+      {
+        "title": "Tedavi sonrası takip",
+        "text": "Kontrol randevusuyla iyileşmeyi takip ederiz."
+      }
+    ],
+    "stats": [
+      {
+        "value": 5,
+        "suffix": "",
+        "label": "Puan",
+        "text": "Google'daki 71 yorumun ortalaması."
+      },
+      {
+        "value": 71,
+        "suffix": "",
+        "label": "Yorum",
+        "text": "Hastalarımızın Google yorumu."
+      },
+      {
+        "value": 4,
+        "suffix": "",
+        "label": "Adım",
+        "text": "Muayeneden kontrole kadar."
+      },
+      {
+        "value": 1,
+        "suffix": "",
+        "label": "Hekim",
+        "text": "Tedaviyi baştan sona aynı hekim yürütür."
+      }
+    ]
+  },
+  "process": {
+    "badge": "Nasıl işler",
+    "title": "İlk muayeneden kontrole",
+    "text": "Her randevuyu sakin ve öngörülebilir kılan basit bir akış.",
+    "kicker": "Randevu alın",
+    "center": "Muayene randevusu",
+    "action": "Bize yazın",
+    "steps": [
+      {
+        "title": "Muayene",
+        "text": "Dinliyor, dişlerinizi inceliyor ve şikâyetinizi anlıyoruz."
+      },
+      {
+        "title": "Plan",
+        "text": "Tedavi seçeneklerini, sırasını ve süresini anlatırız."
+      },
+      {
+        "title": "Tedavi",
+        "text": "İşlem sırasında her adımı önceden haber veririz."
+      },
+      {
+        "title": "Kontrol",
+        "text": "İyileşmeyi kontrol eder, bakım önerilerini paylaşırız."
+      }
+    ]
+  },
+  "testimonials": {
+    "badge": "Hasta yorumları",
+    "title": "Gerçek yorumlar.",
+    "accent": "Gerçek sonuçlar.",
+    "text": "Hastalarımız klinikteki deneyimlerini nasıl anlatıyor.",
+    "see": "Google yorumlarını görün",
+    "source": "Google yorumu",
+    "verified": "Doğrulandı",
+    "prev": "Önceki yorum",
+    "next": "Sonraki yorum",
+    "items": [
+      {
+        "name": "Google kullanıcısı",
+        "role": "bir yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "Diş tedavisi için Seyma hnm ilgilendi. Başlangıçta tereddüt etmeme rağmen tüm işlem acısız ve sıkıntısız oldu. Diğer Diş klnikleri ile aralarındaki fark Şeyma hnmın kalan dişleri çekmek istemeyip son ana kadar kurtarmak istemeseydi. Yapılan işlem ücretlerin ise bi tık daha yüksek olması diğer kliniklere göre 😉\nSonuç olarak güvenle gidebilirsiniz.",
+        "rating": 5
+      },
+      {
+        "name": "Google kullanıcısı",
+        "role": "bir yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "İnternetteki yorumları okuyarak gittim.Ben Şeyma Hn'ın yaşı genç olduğu için açıkçası tereddüt ederek gittim ama tereddüte gerek yokmuş. Dt. Şeyma Hanım hem güzelce açıklıyor, hem eli hafifti, hem özenli güzel yapıyor, hem de indirim uyguluyor.  Eline koluna sağlık. İnşaAllah yeni dişçim o artık :)",
+        "rating": 5
+      },
+      {
+        "name": "Google kullanıcısı",
+        "role": "bir yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "Kurumda çalışanlar güler yüzlü, nazik ve ilgililer. Doktorum Şeyma Şimşek çok memnunum. Normalde dişçiye gitmekten korkardım. Eli çok hafif ve normalde başka yerde çekilecek denilen dişleri kurtarmakla üstüne yok. İşinde cok başarılı bir hekim. Herkese tavsiye ederim.",
+        "rating": 5
+      },
+      {
+        "name": "Google kullanıcısı",
+        "role": "2 yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "Kardeşimle birlikte dişle ilgili tüm işlemleri (normal ve estetik dolgu, kanal tedavisi, diş eti iltihabı tedavisi, diş beyazlatma vs) Vadisehir Ağız ve Diş Sağlığı Polikliniğinde yaptırdık ve çok memnun kaldık. Diş hekimi Merve Hanım oldukça ilgili, hayatımdaki en detaylı diş muayenesini kendisinde oldum. Merak ettiğiniz tüm soruları cevaplayıp gerekli bilgilendirmeyi sağlamakta. Dişlerim konusunda gönül rahatlığıyla gittiğim tek yer.",
+        "rating": 5
+      },
+      {
+        "name": "Google kullanıcısı",
+        "role": "2 yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "Vadişehie diş kliniğine tavsiye üzerine geldim. Doktorlarımız ve ekip çok ilgililer ilk girişten itibaren ilgi ve alakalarını hiç eksik etmediler. Her konu da yardımcı olup memnun etmek için ellerinden gelenin fazlasını yaptılar. Temizlik ve hijyen açısından da çok titiz ve temiz bir klinik. Tavsiye üzerine geldiğim ve çok memnun kaldığım vadişehir diş kliniğini ben de gitmek isteyen ve kendine iyi bir dişçi arayan herkese kesinlikle tavsiye ederim. Her şey için teşekkür ederim.",
+        "rating": 5
+      }
+    ]
+  },
+  "quote": {
+    "badge": "Randevu",
+    "title": "Şikâyetinizi anlatın",
+    "accent": "randevunuzu alın",
+    "text": "Birkaç ayrıntı paylaşın, size uygun gün ve saati planlayalım.",
+    "steps": [
+      {
+        "title": "Kısa sürede dönüş",
+        "text": "Talebinizi inceler, uygun randevu saatleriyle döneriz."
+      },
+      {
+        "title": "Net plan",
+        "text": "Hangi işlemin yapılacağını ve sırasını baştan bilirsiniz."
+      },
+      {
+        "title": "Yükümlülük yok",
+        "text": "Muayeneden sonra karar sizin."
+      }
+    ],
+    "hotline": "Doğrudan hat"
+  },
+  "form": {
+    "eyebrow": "Randevu talebi",
+    "title": "Randevu isteyin",
+    "text": "İhtiyacınızı yazın, size dönüş yapalım.",
+    "name": "Ad soyad",
+    "namePlaceholder": "Adınız",
+    "phone": "Telefon",
+    "company": "Sigorta",
+    "companyPlaceholder": "Sigorta ya da kurum adı",
+    "service": "Tedavi",
+    "choose": "Tedavi seçin",
+    "details": "Şikâyet ve notlar",
+    "detailsPlaceholder": "Şikâyetinizi kısaca yazın...",
+    "consent": "Bilgilerimin randevu planlaması için kullanılmasını kabul ediyorum.",
+    "send": "WhatsApp ile gönder",
+    "safe": "Verileriniz güvende",
+    "reply": "Ortalama yanıt: kısa süre içinde",
+    "sent": "Talebinizle WhatsApp açılıyor...",
+    "heading": "Yeni randevu talebi"
+  },
+  "blog": {
+    "badge": "Bilgiler",
+    "title": "Blog",
+    "intro": "Ağız ve diş sağlığı üzerine kısa yazılar.",
+    "readMore": "Devamını okuyun",
+    "all": "Tüm yazılar",
+    "related": "İlgili yazılar",
+    "summary": "Özet",
+    "consultTitle": "Bu konuda sorunuz mu var?",
+    "consultText": "Bize yazın, hekimimiz yardımcı olsun.",
+    "consultAction": "Bize sorun"
+  },
+  "faq": {
+    "badge": "SSS",
+    "title": "Sıkça sorulan sorular",
+    "text": "En sık duyduğumuz sorulara kısa yanıtlar.",
+    "items": [
+      {
+        "question": "Nasıl randevu alırım?",
+        "answer": "WhatsApp'tan yazın ya da telefonla arayın; size uygun gün ve saati birlikte belirleyelim."
+      },
+      {
+        "question": "Tedavi ücretleri ne kadar?",
+        "answer": "İşleme göre değişir. Muayeneden sonra yapılacakları ve ücreti açıkça konuşuruz."
+      },
+      {
+        "question": "Tedavi ne kadar sürer?",
+        "answer": "Bazı işlemler tek randevuda biter; daha uzun tedaviler adım adım planlanır."
+      },
+      {
+        "question": "Tedavi sonrası kontrol var mı?",
+        "answer": "Evet. İyileşmeyi görmek için kontrol randevusu planlarız."
+      }
+    ],
+    "bannerTitle": "Sorunuz mu var?",
+    "bannerAccent": "Bize yazın.",
+    "bannerText": "WhatsApp'tan yazın, kısa sürede yanıtlayalım."
+  },
+  "ctaBanner": {
+    "eyebrow": "Randevu",
+    "title": "İlk adımı atın",
+    "text": "Şikâyetinizi anlatın, size nasıl yardımcı olabileceğimizi gösterelim.",
+    "help": "Yardım mı lazım?",
+    "call": "Bizi arayın"
+  },
+  "about": {
+    "eyebrow": "Kurumsal",
+    "title": "Hakkımızda",
+    "intro": "Başakşehir'de insanı ve ağız sağlığını önceleyen bir poliklinik.",
+    "kicker": "Yaklaşımımız",
+    "heading": "Tedaviyi telaşsız ve anlaşılır hale getiriyoruz.",
+    "body": "Dt. Merve Baykal ve ekibi önce dinler, dişlerinizi detaylıca inceler, ardından seçenekleri sade bir dille anlatır. Yapılan her işlemi önceden haber veririz.",
+    "principles": "İlkelerimiz",
+    "principlesTitle": "Her randevuda aynı dört ilke.",
+    "band": "Doğru kararı birlikte verelim."
+  },
+  "service": {
+    "scope": "Neler yapılır",
+    "title": "Baştan doğru planlayın.",
+    "body": "Her tedavi kısa bir muayeneyle başlar. Dişlerinizin durumunu görüp seçenekleri anlatırız; böylece hangi işlemin yapılacağını önceden bilirsiniz.",
+    "checks": "Muayenede neler bakıyoruz",
+    "checkItems": [
+      "Şikâyetiniz ve diş sağlığı geçmişiniz",
+      "Dişler, diş eti ve mevcut dolgular",
+      "Ağız içi muayene bulguları",
+      "Tedavi sırası ve kontrol planı"
+    ],
+    "stepsTitle": "Dört adım, sürpriz yok.",
+    "sideKicker": "Hekiminizle konuşun",
+    "sideTitle": "Size uygun tedaviyi birlikte bulalım.",
+    "sideText": "Birkaç ayrıntı paylaşın, size randevu önerelim.",
+    "sideList": [
+      "Detaylı muayene",
+      "İşlem öncesi bilgilendirme",
+      "Tek hekim takibi"
+    ],
+    "related": "Diğer tedaviler",
+    "relatedTitle": "İlgili tedaviler.",
+    "formTitle": "Randevu alın:",
+    "formHeading": "Tedavinizi birlikte planlayalım.",
+    "formText": "Muayenede durumu konuşur, size sade bir tedavi planı anlatırız."
+  },
+  "contact": {
+    "eyebrow": "İletişim ve randevu",
+    "title": "İletişim",
+    "intro": "Sorunuz mu var ya da randevu mu almak istiyorsunuz? Yazın, kısa sürede dönelim.",
+    "kicker": "İletişim",
+    "heading": "Bize yazın.",
+    "text": "Şikâyetinizi anlatın, ekibimiz sizinle iletişime geçsin.",
+    "office": "Adresimiz",
+    "phoneEmail": "Telefon ve e-posta",
+    "hours": "Çalışma saatleri",
+    "hoursValue": "Randevu ile çalışıyoruz",
+    "closed": "Randevu saatlerini WhatsApp'tan öğrenin",
+    "phone": "Telefon",
+    "email": "E-posta"
+  },
+  "footer": {
+    "tagline": "Başakşehir'de ağız ve diş sağlığı: muayene, tedavi ve kontrol.",
+    "rights": "Tüm hakları saklıdır.",
+    "contact": "İletişim ve adres",
+    "trust": [
+      "Detaylı muayene",
+      "Acısız işlem",
+      "Kontrol randevusu"
+    ]
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "text": "Aradığınız sayfa mevcut değil ya da taşınmış.",
+    "home": "Ana sayfaya dön"
+  }
+}

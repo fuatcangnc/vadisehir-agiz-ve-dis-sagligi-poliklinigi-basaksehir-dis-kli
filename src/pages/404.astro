@@ -1,0 +1,11 @@
+---
+import { ArrowRight } from '@lucide/astro'
+import Layout from '@/layouts/Layout.astro'
+import { DEFAULT_LOCALE, href, siteText } from '@/lib/i18n'
+
+// Static hosts serve one 404 page, so it speaks the default language.
+const locale = DEFAULT_LOCALE
+const t = await siteText(locale)
+---
+
+<Layout locale={locale} title={t.notFound.title}><main class="search-page"><div class="shell"><p class="eyebrow">404 · {t.notFound.title}</p><h1 class="section-heading">{t.notFound.title}</h1><p class="section-lead">{t.notFound.text}</p><div class="hero-actions"><a class="button button--primary" href={href(locale)}>{t.notFound.home} <ArrowRight size={16} class="rtl:rotate-180" /></a><a class="button" style="border:1px solid var(--line)" href={href(locale, '/services/')}>{t.services.all}</a></div></div></main></Layout>

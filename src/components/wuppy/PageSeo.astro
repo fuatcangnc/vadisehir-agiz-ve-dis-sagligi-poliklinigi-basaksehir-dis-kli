@@ -1,0 +1,66 @@
+---
+// SEO, Open Graph, schema and head code of a page, from the layout's defaults and the page's WuppyCMS settings.
+// Without props it writes only what was set in WuppyCMS, so it can sit next to a layout's own tags: the wuppy-seo
+// integration (seo.mjs) then drops the layout's tags of each kind written here, between the wuppy-seo markers.
+import { isHidden, pageImage, pageSettings } from './page-settings'
+
+interface Props {
+  title?: string
+  description?: string
+  canonical?: string | URL
+  /** Share image when the page has none of its own. */
+  image?: string
+  siteName?: string
+  /** Open Graph locale, e.g. "en_US". */
+  locale?: string
+}
+
+const props = Astro.props
+const p = await pageSettings(Astro.routePattern, Astro.currentLocale)
+// In astro dev, against the dev server: the site URL doesn't serve this build's images yet (a toolbar preview would show none).
+const abs = (url?: string) => (url ? new URL(url, (import.meta.env.DEV ? Astro.url : Astro.site) ?? Astro.url).href : undefined)
+// The page name set in WuppyCMS is the title tag when no SEO title is set.
+const title = p.seo?.title || p.title || props.title
+const description = p.seo?.description || props.description
+const canonical = abs(p.seo?.canonical || props.canonical?.toString())
+const ogTitle = p.og?.title || title
+const ogDescription = p.og?.description || description
+const ogImage = abs((await pageImage(p.og?.image)) || props.image)
+let jsonLd: Record<string, unknown> | Record<string, unknown>[] | undefined
+try {
+  jsonLd = p.schema?.trim() ? JSON.parse(p.schema) : undefined
+} catch {
+  // Broken JSON-LD is left out rather than breaking the build.
+}
+// Site search (Pagefind) reads these; empty means the same as the SEO title, description and share image.
+const search = [
+  p.search?.title && { 'data-pagefind-meta': 'title[content]', content: p.search.title },
+  p.search?.description && { 'data-pagefind-meta': 'description[content]', content: p.search.description },
+  p.search?.image && { 'data-pagefind-meta': 'image[content]', content: abs(await pageImage(p.search.image)) },
+].filter(Boolean) as Record<string, string>[]
+---
+
+<meta name="wuppy-seo" content="start" />
+{title && <title>{title}</title>}
+{description && <meta name="description" content={description} />}
+{isHidden(p) && <meta name="robots" content="noindex" />}
+{canonical && <link rel="canonical" href={canonical} />}
+{(ogTitle || ogDescription || ogImage) && (
+  <Fragment>
+    {ogTitle && <meta property="og:title" content={ogTitle} />}
+    {ogDescription && <meta property="og:description" content={ogDescription} />}
+    {canonical && <meta property="og:url" content={canonical} />}
+    {/* Only with the layout's props: next to a layout's own tags, its og:type (article, …) stays. */}
+    {props.title && <meta property="og:type" content="website" />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && ogTitle && <meta property="og:image:alt" content={ogTitle} />}
+    {props.locale && <meta property="og:locale" content={props.locale} />}
+    {props.siteName && <meta property="og:site_name" content={props.siteName} />}
+  </Fragment>
+)}
+{ogTitle && <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />}
+{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />}
+{p.author && <meta name="author" content={p.author} />}
+{search.map((m) => <meta {...m} />)}
+{p.head && <Fragment set:html={p.head} />}
+<meta name="wuppy-seo" content="end" />

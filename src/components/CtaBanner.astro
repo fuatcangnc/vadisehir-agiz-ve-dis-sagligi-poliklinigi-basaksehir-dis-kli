@@ -1,0 +1,83 @@
+---
+import { Icon } from 'astro-icon/components'
+import { href, phoneHref, settings, siteText, whatsappHref } from '@/lib/i18n'
+import SiteImage from './SiteImage.astro'
+
+interface Props {
+  locale: string
+}
+
+const { locale } = Astro.props
+const t = await siteText(locale)
+const s = await settings()
+---
+
+<!-- CTA Banner Component -->
+<section class="relative overflow-hidden bg-white text-neutral-950 [content-visibility:auto] [contain-intrinsic-size:auto_700px]">
+  <SiteImage
+    class="cta-mechanic-image hidden lg:block absolute bottom-0 start-0 z-0 h-full w-[45%] max-w-[620px] object-cover pointer-events-none select-none [mask-image:linear-gradient(to_right,#000_70%,transparent)] rtl:[mask-image:linear-gradient(to_left,#000_70%,transparent)]"
+    src="/images/cta.webp"
+    alt=""
+    widths={[420, 560, 620]}
+    sizes="(min-width: 1024px) 45vw, 1px"
+    loading="lazy"
+    width="620"
+    height="420"
+    quality={75}
+  />
+
+  <div class="shell relative isolate grid min-h-[24rem] lg:min-h-[26rem] overflow-hidden lg:grid-cols-[.9fr_1.1fr] lg:gap-8 items-center">
+    <div class="col-start-1 hidden lg:block" aria-hidden="true"></div>
+
+    <div class="relative z-10 flex flex-col justify-center gap-5 py-12 ps-0 lg:col-start-2 lg:py-14 lg:ps-6">
+      <span class="text-xs font-black uppercase tracking-[.18em] text-primary">{t.ctaBanner.eyebrow}</span>
+      <h2 class="max-w-2xl text-3xl sm:text-4xl font-black uppercase leading-[1.02] tracking-[-0.04em] text-neutral-950 md:text-5xl">
+        {t.ctaBanner.title}
+      </h2>
+      <p class="max-w-xl text-sm leading-relaxed text-neutral-600">
+        {t.ctaBanner.text}
+      </p>
+
+      <div class="flex flex-wrap gap-3 pt-2">
+        <a
+          class="inline-flex min-h-12 items-center justify-center gap-3 bg-primary hover:bg-[#b84d12] px-6 text-xs font-black uppercase tracking-wider !text-white transition-all duration-300 hover:scale-[1.02] shadow-md shadow-primary/20"
+          href={whatsappHref(s.whatsapp, t.whatsapp.message)}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>{t.whatsapp.ask}</span>
+          <Icon name="lucide:arrow-right" size={16} class="rtl:rotate-180" />
+        </a>
+        <a
+          class="inline-flex min-h-12 items-center justify-center gap-3 border-2 border-neutral-950 bg-transparent hover:bg-neutral-950 hover:!text-white px-6 text-xs font-black uppercase tracking-wider !text-neutral-950 transition-all duration-300 hover:scale-[1.02]"
+          href={href(locale, '/services/')}
+        >
+          <span>{t.services.all}</span>
+          <Icon name="lucide:arrow-right" size={16} class="rtl:rotate-180" />
+        </a>
+      </div>
+
+      <div class="flex items-center gap-4 pt-3 sm:pt-2">
+        <span class="grid size-12 sm:size-14 shrink-0 place-items-center bg-black text-white">
+          <Icon name="lucide:phone" size={22} class="sm:size-6" />
+        </span>
+        <div class="flex flex-col">
+          <span class="text-xs font-black uppercase tracking-wider text-primary">{t.ctaBanner.help}</span>
+          <a href={phoneHref(s.phone)} class="mt-0.5 text-lg sm:text-2xl font-black uppercase !text-neutral-950 hover:!text-primary transition-colors inline-block">
+            {t.ctaBanner.call}: <bdi dir="ltr">{s.phone}</bdi>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-divider-black-left absolute -bottom-[1px] left-0 z-10 pointer-events-none border-0 outline-none shadow-none" aria-hidden="true"></div>
+  <div class="custom-divider-black-right absolute -bottom-[1px] right-0 z-10 pointer-events-none border-0 outline-none shadow-none" aria-hidden="true"></div>
+</section>
+
+<style>
+  @media (max-width: 1023px) {
+    .cta-mechanic-image {
+      display: none !important;
+    }
+  }
+</style>

@@ -1,0 +1,111 @@
+---
+import { ArrowLeft, ArrowRight } from '@lucide/astro'
+import { Carousel, CarouselSlide } from '@/ui/carousel'
+import { href, localized, settings, siteText } from '@/lib/i18n'
+import SiteImage from './SiteImage.astro'
+
+interface Props {
+  locale: string
+}
+
+const { locale } = Astro.props
+const t = await siteText(locale)
+const { brand } = await settings()
+const services = (await localized('services', locale)).sort((a, b) => a.data.order - b.data.order)
+const initials = brand.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase()
+---
+
+<section class="overflow-hidden bg-white py-18 md:py-24" id="services">
+  <div class="shell">
+    <div class="mx-auto max-w-4xl text-center" data-reveal>
+      <div class="inline-flex items-center gap-2 border border-neutral-300 bg-neutral-100 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-neutral-900">
+        <span class="size-2 rounded-full bg-primary animate-pulse"></span>
+        <span>{t.services.badge}</span>
+      </div>
+      <h2 class="mx-auto mt-4 max-w-3xl text-3xl font-black uppercase leading-[1.08] tracking-[-0.04em] text-[#152033] sm:text-4xl lg:text-[40px]">
+        {t.services.title} <span class="text-primary">{t.services.accent}</span>
+      </h2>
+      <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600">{t.services.intro}</p>
+    </div>
+
+    <div class="mt-10 overflow-hidden xl:mt-12">
+      <Carousel class="gap-5 pb-4 sm:gap-6" align="start" snapType="proximity" data-service-carousel>
+        {services.map((service, index) => {
+          const url = href(locale, `/services/${service.slug}/`)
+          return (
+            <CarouselSlide class="min-w-0 flex-[0_0_88%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] xl:flex-[0_0_25%]">
+              <article class="group h-full">
+                <div class="flex min-h-[630px] flex-col overflow-hidden rounded-[19px] border border-black/[0.06] bg-white p-5 transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_20px_42px_rgba(18,32,51,0.12)] sm:p-6">
+                  <div class="flex h-14 items-start gap-4">
+                    <span class="grid size-11 shrink-0 place-items-center bg-primary text-sm font-black text-white">{String(index + 1).padStart(2, '0')}</span>
+                    <h3 class="line-clamp-2 pt-0.5 text-[15px] font-black uppercase leading-[1.25] tracking-[-0.025em] text-[#152033]">{service.data.title}</h3>
+                  </div>
+
+                  <a aria-label={service.data.title} class="relative mt-4 block aspect-[16/9] overflow-hidden rounded-xl bg-[#1b2631]" href={url}>
+                    <SiteImage
+                      alt={service.data.title}
+                      class="size-full object-cover transition duration-700 group-hover:scale-[1.06]"
+                      src={service.data.image}
+                      widths={[320, 480, 600]}
+                      sizes="(max-width: 640px) 88vw, (max-width: 1024px) 45vw, 300px"
+                      width="500"
+                      height="281"
+                      quality={58}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+
+                  <p class="mt-5 h-12 line-clamp-2 text-sm leading-6 text-[#626d7c]">{service.data.description}</p>
+
+                  <ul class="mt-5 space-y-2 border-t border-black/[0.08] pt-5 text-[13px] font-bold text-[#152033]">
+                    {service.data.benefits.map((benefit) => (
+                      <li class="flex items-center before:content-['→'] before:text-primary before:font-black before:me-2 before:text-sm rtl:before:content-['←']">
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a class="mt-auto flex h-12 items-center justify-between border border-black/15 ps-4 text-[10px] font-black uppercase leading-3 tracking-[0.035em] text-[#152033] transition hover:border-primary hover:text-primary" href={url}>
+                    {service.data.title} · {t.services.details}
+                    <span class="grid h-full w-12 place-items-center bg-[#121820] text-white transition group-hover:bg-primary">
+                      <ArrowRight class="size-4 rtl:rotate-180" />
+                    </span>
+                  </a>
+                </div>
+              </article>
+            </CarouselSlide>
+          )
+        })}
+      </Carousel>
+    </div>
+
+    <div class="mt-9 flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:text-start">
+      <div class="flex -space-x-2 rtl:space-x-reverse" aria-hidden="true">
+        <span class="grid size-9 place-items-center rounded-full border-2 border-white bg-[#25313c] text-[10px] font-black text-white">{initials}</span>
+        <span class="grid size-9 place-items-center rounded-full border-2 border-white bg-primary text-base text-white">↗</span>
+      </div>
+      <p class="text-sm text-[#4f5967]">{t.services.help}</p>
+      <div class="flex items-center gap-2">
+        <button aria-label="Previous" class="grid size-9 place-items-center rounded-full border border-black/15 text-[#152033] transition enabled:hover:border-primary enabled:hover:bg-primary enabled:hover:text-white disabled:cursor-not-allowed disabled:opacity-30" data-service-prev type="button">
+          <ArrowLeft class="size-4 rtl:rotate-180" />
+        </button>
+        <button aria-label="Next" class="grid size-9 place-items-center rounded-full border border-black/15 text-[#152033] transition enabled:hover:border-primary enabled:hover:bg-primary enabled:hover:text-white disabled:cursor-not-allowed disabled:opacity-30" data-service-next type="button">
+          <ArrowRight class="size-4 rtl:rotate-180" />
+        </button>
+      </div>
+      <a class="inline-flex items-center gap-2 border-b border-[#1e2936] pb-1 text-sm font-bold text-[#152033] transition hover:border-primary hover:text-primary" href={href(locale, '/services/')}>
+        {t.services.all} <ArrowRight class="size-4 rtl:rotate-180" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const serviceCarousel = document.querySelector('[data-service-carousel]')
+    const step = () => (serviceCarousel.clientWidth / 2) * (document.dir === 'rtl' ? -1 : 1)
+    document.querySelector('[data-service-prev]')?.addEventListener('click', () => serviceCarousel?.scrollBy({ left: -step(), behavior: 'smooth' }))
+    document.querySelector('[data-service-next]')?.addEventListener('click', () => serviceCarousel?.scrollBy({ left: step(), behavior: 'smooth' }))
+  })
+</script>

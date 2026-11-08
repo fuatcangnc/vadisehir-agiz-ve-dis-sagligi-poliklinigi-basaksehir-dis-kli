@@ -1,0 +1,369 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "company": "Cabinet",
+    "about": "À propos",
+    "services": "Soins",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "cta": "Prendre rendez-vous",
+  "topbar": "Soins dentaires à Başakşehir : écoute, explications claires et rendez-vous simple.",
+  "whatsapp": {
+    "message": "Bonjour, je souhaite prendre rendez-vous.",
+    "online": "En ligne",
+    "help": "Besoin d'aide ?",
+    "ask": "Écrire sur WhatsApp"
+  },
+  "hero": {
+    "eyebrow": "Soins · Prévention · Suivi",
+    "title": "Nous prenons soin de votre sourire",
+    "accent": "en toute confiance",
+    "text": "Un cabinet de quartier à Başakşehir. Nous vous écoutons, examinons vos dents et expliquons chaque étape avant de soigner, dans un cadre calme et propre.",
+    "primary": "Prendre rendez-vous",
+    "rating": "Note 5 étoiles sur Google, 71 avis",
+    "panel": "Notre approche",
+    "status": "Rendez-vous rapide"
+  },
+  "highlights": [
+    "Premier échange à l'écoute",
+    "Explications claires à chaque étape",
+    "Suivi après les soins"
+  ],
+  "metrics": [
+    {
+      "value": "5",
+      "label": "Note Google"
+    },
+    {
+      "value": "71",
+      "label": "Avis Google"
+    },
+    {
+      "value": "4",
+      "label": "Étapes du parcours"
+    }
+  ],
+  "services": {
+    "badge": "Nos soins",
+    "title": "Des soins pour",
+    "accent": "retrouver le sourire",
+    "intro": "Du contrôle de routine aux soins esthétiques, nous vous accompagnons à chaque étape.",
+    "more": "En savoir plus",
+    "all": "Tous les soins",
+    "help": "Vous hésitez ? Nous vous aidons à choisir le soin adapté.",
+    "details": "détails",
+    "count": "soins"
+  },
+  "pillars": {
+    "badge": "Deux façons de nous connaître",
+    "title": "Des soins de confiance et",
+    "accent": "des conseils utiles",
+    "text": "Choisissez ce dont vous avez besoin : un rendez-vous au cabinet ou des réponses claires à vos questions.",
+    "view": "Voir",
+    "items": [
+      {
+        "title": "Nos soins",
+        "subtitle": "Réalisés avec vous",
+        "tag": "Patients & familles",
+        "text": "Du contrôle aux soins esthétiques, nous avançons avec vous jusqu'à ce que vous soyez à l'aise.",
+        "list": "Soins les plus demandés",
+        "bullets": [
+          "Premier rendez-vous facile",
+          "Explications claires",
+          "Un seul interlocuteur"
+        ],
+        "action": "Tous les soins"
+      },
+      {
+        "title": "Conseils & prévention",
+        "subtitle": "À votre rythme",
+        "tag": "Ressources gratuites",
+        "text": "Des articles courts pour répondre aux questions les plus fréquentes sur les dents et les gencives.",
+        "list": "Derniers articles",
+        "bullets": [
+          "Conseils pratiques",
+          "Exemples concrets",
+          "Mis à jour régulièrement"
+        ],
+        "action": "Lire le blog"
+      }
+    ]
+  },
+  "why": {
+    "badge": "Pourquoi nous choisir",
+    "title": "Pourquoi les patients choisissent notre cabinet",
+    "text": "Une écoute attentive, des explications claires et une équipe qui prend soin de vous.",
+    "features": [
+      {
+        "title": "Équipe à l'écoute",
+        "text": "Des soins expliqués pas à pas, sans jargon."
+      },
+      {
+        "title": "Parcours clair",
+        "text": "Vous savez ce qui se passe et pourquoi, à chaque rendez-vous."
+      },
+      {
+        "title": "Réponse rapide",
+        "text": "Nous répondons vite à vos questions et demandes de rendez-vous."
+      },
+      {
+        "title": "Suivi après les soins",
+        "text": "Nous restons disponibles après votre traitement."
+      }
+    ],
+    "stats": [
+      {
+        "value": 5,
+        "suffix": "",
+        "label": "Note",
+        "text": "Note moyenne sur Google."
+      },
+      {
+        "value": 71,
+        "suffix": "",
+        "label": "Avis",
+        "text": "Avis patients sur Google."
+      },
+      {
+        "value": 4,
+        "suffix": "",
+        "label": "Étapes",
+        "text": "Un parcours simple, de l'examen au suivi."
+      },
+      {
+        "value": 2,
+        "suffix": "",
+        "label": "Canaux",
+        "text": "Téléphone ou WhatsApp pour nous joindre."
+      }
+    ]
+  },
+  "process": {
+    "badge": "Comment ça se passe",
+    "title": "Du premier rendez-vous au suivi",
+    "text": "Un parcours simple pour des soins sans stress.",
+    "kicker": "Premier rendez-vous",
+    "center": "Parlons de vos dents",
+    "action": "Écrivez-nous",
+    "steps": [
+      {
+        "title": "Écoute",
+        "text": "Nous écoutons vos besoins et vos inquiétudes."
+      },
+      {
+        "title": "Examen",
+        "text": "Nous examinons vos dents et expliquons les options."
+      },
+      {
+        "title": "Soins",
+        "text": "Le dentiste réalise le soin convenu, en douceur."
+      },
+      {
+        "title": "Suivi",
+        "text": "Nous vérifions le résultat et restons disponibles."
+      }
+    ]
+  },
+  "testimonials": {
+    "badge": "Témoignages",
+    "title": "De vrais retours.",
+    "accent": "De vrais sourires.",
+    "text": "Ce que nos patients disent de leur visite.",
+    "see": "Voir les avis Google",
+    "source": "Avis Google",
+    "verified": "Vérifié",
+    "prev": "Avis précédent",
+    "next": "Avis suivant",
+    "items": [
+      {
+        "name": "Utilisateur Google",
+        "role": "bir yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "Diş tedavisi için Seyma hnm ilgilendi. Başlangıçta tereddüt etmeme rağmen tüm işlem acısız ve sıkıntısız oldu. Diğer Diş klnikleri ile aralarındaki fark Şeyma hnmın kalan dişleri çekmek istemeyip son ana kadar kurtarmak istemeseydi. Yapılan işlem ücretlerin ise bi tık daha yüksek olması diğer kliniklere göre 😉\nSonuç olarak güvenle gidebilirsiniz.",
+        "rating": 5
+      },
+      {
+        "name": "Utilisateur Google",
+        "role": "bir yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "İnternetteki yorumları okuyarak gittim.Ben Şeyma Hn'ın yaşı genç olduğu için açıkçası tereddüt ederek gittim ama tereddüte gerek yokmuş. Dt. Şeyma Hanım hem güzelce açıklıyor, hem eli hafifti, hem özenli güzel yapıyor, hem de indirim uyguluyor.  Eline koluna sağlık. İnşaAllah yeni dişçim o artık :)",
+        "rating": 5
+      },
+      {
+        "name": "Utilisateur Google",
+        "role": "bir yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "Kurumda çalışanlar güler yüzlü, nazik ve ilgililer. Doktorum Şeyma Şimşek çok memnunum. Normalde dişçiye gitmekten korkardım. Eli çok hafif ve normalde başka yerde çekilecek denilen dişleri kurtarmakla üstüne yok. İşinde cok başarılı bir hekim. Herkese tavsiye ederim.",
+        "rating": 5
+      },
+      {
+        "name": "Utilisateur Google",
+        "role": "2 yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "Kardeşimle birlikte dişle ilgili tüm işlemleri (normal ve estetik dolgu, kanal tedavisi, diş eti iltihabı tedavisi, diş beyazlatma vs) Vadisehir Ağız ve Diş Sağlığı Polikliniğinde yaptırdık ve çok memnun kaldık. Diş hekimi Merve Hanım oldukça ilgili, hayatımdaki en detaylı diş muayenesini kendisinde oldum. Merak ettiğiniz tüm soruları cevaplayıp gerekli bilgilendirmeyi sağlamakta. Dişlerim konusunda gönül rahatlığıyla gittiğim tek yer.",
+        "rating": 5
+      },
+      {
+        "name": "Utilisateur Google",
+        "role": "2 yıl önce",
+        "project": "Diş Kliniği",
+        "quote": "Vadişehie diş kliniğine tavsiye üzerine geldim. Doktorlarımız ve ekip çok ilgililer ilk girişten itibaren ilgi ve alakalarını hiç eksik etmediler. Her konu da yardımcı olup memnun etmek için ellerinden gelenin fazlasını yaptılar. Temizlik ve hijyen açısından da çok titiz ve temiz bir klinik. Tavsiye üzerine geldiğim ve çok memnun kaldığım vadişehir diş kliniğini ben de gitmek isteyen ve kendine iyi bir dişçi arayan herkese kesinlikle tavsiye ederim. Her şey için teşekkür ederim.",
+        "rating": 5
+      }
+    ]
+  },
+  "quote": {
+    "badge": "Rendez-vous rapide",
+    "title": "Parlez-nous de vos dents",
+    "accent": "et prenez rendez-vous",
+    "text": "Dites-nous ce qui vous gêne et nous vous proposons un rendez-vous clair.",
+    "steps": [
+      {
+        "title": "Réponse rapide",
+        "text": "Nous vous répondons dès que possible pour fixer un créneau."
+      },
+      {
+        "title": "Explications claires",
+        "text": "Vous savez ce qui est prévu avant de commencer."
+      },
+      {
+        "title": "Sans engagement",
+        "text": "Le premier échange ne vous engage à rien."
+      }
+    ],
+    "hotline": "Ligne directe"
+  },
+  "form": {
+    "eyebrow": "Rendez-vous",
+    "title": "Demander un rendez-vous",
+    "text": "Dites-nous ce dont vous avez besoin et nous vous répondons vite.",
+    "name": "Nom complet",
+    "namePlaceholder": "Votre nom",
+    "phone": "Téléphone",
+    "company": "Patient",
+    "companyPlaceholder": "Nom du patient",
+    "service": "Soin",
+    "choose": "Choisir un soin",
+    "details": "Motif de la visite",
+    "detailsPlaceholder": "Décrivez brièvement votre besoin...",
+    "consent": "J'accepte que mes données soient utilisées pour préparer mon rendez-vous.",
+    "send": "Envoyer via WhatsApp",
+    "safe": "Vos données sont protégées",
+    "reply": "Réponse rapide",
+    "sent": "Ouverture de WhatsApp avec votre demande...",
+    "heading": "Nouvelle demande de rendez-vous"
+  },
+  "blog": {
+    "badge": "Conseils",
+    "title": "Blog",
+    "intro": "Conseils et réponses pour prendre soin de vos dents.",
+    "readMore": "Lire la suite",
+    "all": "Tous les articles",
+    "related": "Articles similaires",
+    "summary": "Résumé",
+    "consultTitle": "Une question sur ce sujet ?",
+    "consultText": "Envoyez-nous un message, notre équipe se fera un plaisir de vous aider.",
+    "consultAction": "Nous demander"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Questions fréquentes",
+    "text": "Des réponses rapides aux questions les plus courantes.",
+    "items": [
+      {
+        "question": "Comment prendre rendez-vous ?",
+        "answer": "Envoyez-nous un message ou appelez-nous. Nous fixons un premier rendez-vous pour examiner vos dents et comprendre vos besoins."
+      },
+      {
+        "question": "Combien coûte une consultation ?",
+        "answer": "Le tarif dépend du soin. Après l'examen, nous vous expliquons clairement ce qui est prévu et le coût."
+      },
+      {
+        "question": "Combien de temps dure un soin ?",
+        "answer": "Cela dépend du soin. Nous vous donnons une idée du temps avant de commencer."
+      },
+      {
+        "question": "Proposez-vous un suivi ?",
+        "answer": "Oui. Nous restons disponibles après le soin et vous revoyons si besoin."
+      }
+    ],
+    "bannerTitle": "Une question ?",
+    "bannerAccent": "Parlez à notre équipe.",
+    "bannerText": "Envoyez-nous un message, nous répondons rapidement."
+  },
+  "ctaBanner": {
+    "eyebrow": "Prenez soin de vos dents",
+    "title": "Prêt à prendre rendez-vous ?",
+    "text": "Parlez-nous de votre besoin et nous vous proposons un créneau.",
+    "help": "Besoin d'aide ?",
+    "call": "Appelez-nous"
+  },
+  "about": {
+    "eyebrow": "Cabinet",
+    "title": "À propos",
+    "intro": "Un cabinet de quartier à Başakşehir, centré sur l'écoute et la qualité des soins.",
+    "kicker": "Notre approche",
+    "heading": "Nous prenons le temps d'expliquer avant de soigner.",
+    "body": "L'équipe du cabinet vous reçoit pour un examen attentif. Nous écoutons d'abord, puis proposons des soins adaptés à vos besoins et à votre budget.",
+    "principles": "Nos principes",
+    "principlesTitle": "Les mêmes principes à chaque rendez-vous.",
+    "band": "Prenons soin de votre sourire ensemble."
+  },
+  "service": {
+    "scope": "Ce qui est inclus",
+    "title": "Bien comprendre avant de soigner.",
+    "body": "Chaque visite commence par un examen de vos dents et de vos gencives. Nous expliquons ensuite les options et convenons ensemble du soin.",
+    "checks": "Ce que nous examinons",
+    "checkItems": [
+      "Vos dents et vos gencives",
+      "Vos habitudes et vos antécédents",
+      "Vos attentes et votre budget",
+      "Les prochaines étapes et le suivi"
+    ],
+    "stepsTitle": "Quatre étapes, sans surprise.",
+    "sideKicker": "Conseil du dentiste",
+    "sideTitle": "Trouvons le soin adapté.",
+    "sideText": "Partagez quelques détails et nous revenons vers vous avec une proposition de rendez-vous.",
+    "sideList": [
+      "Premier échange à l'écoute",
+      "Explications claires",
+      "Un seul interlocuteur"
+    ],
+    "related": "Autres soins",
+    "relatedTitle": "Soins associés.",
+    "formTitle": "Prendre rendez-vous :",
+    "formHeading": "Organisons votre visite.",
+    "formText": "Nous précisons le motif, le créneau et le déroulé, puis vous confirmons le rendez-vous."
+  },
+  "contact": {
+    "eyebrow": "Contact & rendez-vous",
+    "title": "Contact",
+    "intro": "Une question ou un besoin de rendez-vous ? Écrivez-nous, nous répondons rapidement.",
+    "kicker": "Contact",
+    "heading": "Envoyez-nous un message.",
+    "text": "Parlez-nous de votre besoin et notre équipe vous recontactera.",
+    "office": "Notre cabinet",
+    "phoneEmail": "Téléphone & e-mail",
+    "hours": "Horaires d'ouverture",
+    "hoursValue": "Horaires communiqués par téléphone",
+    "closed": "Rendez-vous par téléphone ou WhatsApp",
+    "phone": "Téléphone",
+    "email": "E-mail"
+  },
+  "footer": {
+    "tagline": "Soins dentaires, prévention et suivi à Başakşehir.",
+    "rights": "Tous droits réservés.",
+    "contact": "Contact & cabinet",
+    "trust": [
+      "Premier rendez-vous facile",
+      "Explications claires",
+      "Suivi après les soins"
+    ]
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "text": "La page que vous cherchez n'existe pas ou a été déplacée.",
+    "home": "Retour à l'accueil"
+  }
+}

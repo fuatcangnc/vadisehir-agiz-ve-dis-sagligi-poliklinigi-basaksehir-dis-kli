@@ -1,0 +1,57 @@
+{
+  "header": [
+    {
+      "label": "Accueil",
+      "href": "/"
+    },
+    {
+      "label": "Entreprise",
+      "href": "/about/",
+      "children": [
+        {
+          "label": "À propos",
+          "href": "/about/"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact/"
+        }
+      ]
+    },
+    {
+      "label": "Services",
+      "href": "/services/",
+      "type": "services"
+    },
+    {
+      "label": "Blog",
+      "href": "/blog/"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact/"
+    }
+  ],
+  "footer": [
+    {
+      "label": "Accueil",
+      "href": "/"
+    },
+    {
+      "label": "À propos",
+      "href": "/about/"
+    },
+    {
+      "label": "Services",
+      "href": "/services/"
+    },
+    {
+      "label": "Blog",
+      "href": "/blog/"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact/"
+    }
+  ]
+}
